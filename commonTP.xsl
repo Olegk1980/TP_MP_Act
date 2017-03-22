@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="1.0">
-    <xsl:output method="html" indent="yes"
-        omit-xml-declaration="yes" encoding="UTF-8"/>
+    <xsl:output method="html" indent="yes" omit-xml-declaration="yes" encoding="UTF-8"/>
 
     <!--Путь к справочникам отсчитывается относительно основного шаблона-->
     <xsl:param name="urlPrefixDict" select="'TP_v03/'"/>
@@ -383,11 +382,16 @@
                     <xsl:text>Сокращенное наименование юридического лица, если кадастровый инженер является работником юридического лица</xsl:text>
                 </td>
                 <td class="left vborder0">
-                    <xsl:if test="Contractor/Organization">
-                        <ins>
-                            <xsl:value-of select="Contractor/Organization/Name"/>
-                        </ins>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="Contractor/Organization">
+                            <ins>
+                                <xsl:value-of select="Contractor/Organization/Name"/>
+                            </ins>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="procherk"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </td>
             </tr>
             <tr>
@@ -2073,8 +2077,7 @@
             <xsl:value-of select="concat(', ', $addressInp/Level3/@Type, '.', $addressInp/Level3/@Value)"/>
         </xsl:if>
         <xsl:if test="$addressInp/Apartment">
-            <xsl:value-of select="concat(', ', $addressInp/Apartment/@Type, '.', $addressInp/Apartment/@Value)"
-            />
+            <xsl:value-of select="concat(', ', $addressInp/Apartment/@Type, '.', $addressInp/Apartment/@Value)"/>
         </xsl:if>        
     </xsl:template>
     <xsl:template name="tAppliedFilePDF">
@@ -2117,25 +2120,6 @@
                             <b style="font-size: 14px;">
                                 <xsl:value-of select="$text2"/>
                             </b>
-                        </xsl:if>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </xsl:template>
-    <xsl:template name="header2">
-        <xsl:param name="text1"/>
-        <xsl:param name="text2"/>
-        <table class="tbl_section_sheet">
-            <tbody>
-                <tr>
-                    <td style="text-align: left;">
-                        <b style="font-size: 12px;">
-                            <xsl:value-of select="$text1"/>
-                        </b>
-                        <xsl:if test="$text2">
-                                <br />
-                                <xsl:value-of select="$text2"/>
                         </xsl:if>
                     </td>
                 </tr>
