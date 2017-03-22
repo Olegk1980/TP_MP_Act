@@ -80,18 +80,7 @@
                         .tbl_section_sheet th.col200px,.tbl_section_sheet td.col200px{width: 200px}
                         .tbl_section_sheet th.col300px,.tbl_section_sheet td.col300px{width: 300px}
                         DIV.conclusion{width: 668px; overflow: scroll;}
-
-<!--                    
-                        .tbl_section_sheet{width:100%;border-collapse:collapse;border:3px solid #000;border-style: double;padding:1px;margin-bottom:-3px;}
-                        .tbl_section_sheet th,.tbl_section_sheet td.in16{border:1px solid #000;vertical-align:middle;margin:0;padding:4px 3px}
-                        .tbl_section_sheet th.left,.tbl_section_sheet td.left{text-align:left}
-                        .tbl_section_sheet th.vtop,.tbl_section_sheet td.vtop{vertical-align:top}
-                        .tbl_section_date{border:none;border-color:#000}
-                        .tbl_section_date td{text-align:left;margin:0;padding:0 3px}
-                        .tbl_section_date td.nolpad{padding-left:0}
-                        .tbl_section_date td.norpad{padding-right:0}
-                        .tbl_section_date td.understroke{border-bottom:1px solid #000} 
--->                       
+                      
                     </style>
                 <style type="text/css">
                     rect{
