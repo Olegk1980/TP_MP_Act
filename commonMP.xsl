@@ -81,20 +81,17 @@
                     .tbl_section_sheet_data th.col40mm,.tbl_section_sheet_data td.col40mm{width: 40mm}
                     .tbl_section_sheet_data th.col50mm,.tbl_section_sheet_data td.col50mm{width: 50mm}
                     .tbl_section_sheet_data th.col55mm,.tbl_section_sheet_data td.col55mm{width: 55mm}
-                    .tbl_section_sheet_data th.col60mm,.tbl_section_sheet_data td.col60mm{width: 60mm}                    
+                    .tbl_section_sheet_data th.col60mm,.tbl_section_sheet_data td.col60mm{width: 60mm}
                     .tbl_section_sheet_data th.col105mm,.tbl_section_sheet_data td.col105mm{width: 105mm}
 
-
                     .tbl_section_sheet_data th.left,.tbl_section_sheet_data td.left{text-align:left}
-                    
-                    
-                    
+                                        
                     .tbl_section_sheet th.left,.tbl_section_sheet td.left{text-align:left}
                     .tbl_section_sheet th.vtop,.tbl_section_sheet td.vtop{vertical-align:top}
                     .tbl_section_sheet th.vborder0,.tbl_section_sheet td.vborder0{border-left: 0px;border-right: 0px;}
                     .tbl_section_sheet th.gborder0,.tbl_section_sheet td.gborder0{border-bottom: 0px;border-top: 0px;}
 
-                    DIV.conclusion{width: 668px; overflow: scroll;}
+                    DIV.conclusion{width: 176mm; overflow: scroll;}
                     
                 </style>
                 <style type="text/css">
