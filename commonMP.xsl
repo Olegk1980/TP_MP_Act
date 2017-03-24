@@ -17,7 +17,7 @@
                 <style type="text/css">
                     body{color:#000;font-family:times new roman, arial, sans-serif;text-align:center}
                     table{border:0px; width:180mm; margin-left:auto; margin-right:auto; border-collapse:collapse;empty-cells:show}
-                   
+                    thead{display: table-header-group;}
                     span.center{text-align:center}
                     div.title1{text-align:right;padding-right:10px;font-size:100%}
                     div.title2{margin-left:auto;margin-right:auto;font-size:100%;text-align:center;}
@@ -53,52 +53,49 @@
                     padding:1px;
                     margin-bottom:-3px;
                     }
-                    .tbl_section_sheet_header{
-                    border-left-width: 3px;
-                    border-left-style: double;
-                    border-right-width: 3px;
-                    border-right-style: double;
-                    border-top-width: 3px;
-                    border-top-style: double;
-                    padding:1px;
-                    margin-bottom:-1px;
-                    }
                     .tbl_section_sheet_data{
                     border-left-width: 3px;
                     border-left-style: double;
                     border-right-width: 3px;
                     border-right-style: double;
+                    padding:1px;                    
+                    margin-bottom:-1px;
+                    }
+                    .tbl_border_bottom{
                     border-bottom-width: 3px;
                     border-bottom-style: double;
                     padding:1px;
-                    }                    
+                    margin-bottom:-3px;
+                    }
                     .tbl_section_sheet th, .tbl_section_sheet td, 
-                    .tbl_section_sheet_header th, .tbl_section_sheet_header td, 
                     .tbl_section_sheet_data th, .tbl_section_sheet_data td{
                     border:1px solid #000;
                     vertical-align:middle;
                     margin:0;
                     padding:3px 3px;
                     }
-                    .tbl_section_sheet_header th.col5mm,.tbl_section_sheet_header td.col5mm,
-                    .tbl_section_sheet_data th.col5mm,.tbl_section_sheet_data td.col5mm
-                    {width: 5mm}
-                    .tbl_section_sheet_header th.col105mm,.tbl_section_sheet_header td.col105mm,
+                    .tbl_section_sheet_data th.col5mm,.tbl_section_sheet_data td.col5mm{width: 5mm}
+                    .tbl_section_sheet_data th.col20mm,.tbl_section_sheet_data td.col20mm{width: 20mm}
+                    .tbl_section_sheet_data th.col25mm,.tbl_section_sheet_data td.col25mm{width: 25mm}
+                    .tbl_section_sheet_data th.col30mm,.tbl_section_sheet_data td.col30mm{width: 30mm}
+                    .tbl_section_sheet_data th.col40mm,.tbl_section_sheet_data td.col40mm{width: 40mm}
+                    .tbl_section_sheet_data th.col50mm,.tbl_section_sheet_data td.col50mm{width: 50mm}
+                    .tbl_section_sheet_data th.col55mm,.tbl_section_sheet_data td.col55mm{width: 55mm}
+                    .tbl_section_sheet_data th.col60mm,.tbl_section_sheet_data td.col60mm{width: 60mm}                    
                     .tbl_section_sheet_data th.col105mm,.tbl_section_sheet_data td.col105mm{width: 105mm}
-                    .tbl_section_sheet_data th.col300px,.tbl_section_sheet_data td.col300px{width: 300px}
-                    .tbl_section_sheet_data th.col400px,.tbl_section_sheet_data td.col400px{width: 400px}
-                    .tbl_section_sheet_header th.left,.tbl_section_sheet_header td.left,
+
+
                     .tbl_section_sheet_data th.left,.tbl_section_sheet_data td.left{text-align:left}
+                    
+                    
                     
                     .tbl_section_sheet th.left,.tbl_section_sheet td.left{text-align:left}
                     .tbl_section_sheet th.vtop,.tbl_section_sheet td.vtop{vertical-align:top}
                     .tbl_section_sheet th.vborder0,.tbl_section_sheet td.vborder0{border-left: 0px;border-right: 0px;}
                     .tbl_section_sheet th.gborder0,.tbl_section_sheet td.gborder0{border-bottom: 0px;border-top: 0px;}
-                    .tbl_section_sheet th.col5mm,.tbl_section_sheet td.col5mm{width: 5mm}
-                    .tbl_section_sheet th.col200px,.tbl_section_sheet td.col200px{width: 200px}
-                    .tbl_section_sheet th.col300px,.tbl_section_sheet td.col300px{width: 300px}
-                    .tbl_section_sheet th.col400px,.tbl_section_sheet td.col400px{width: 400px}
+
                     DIV.conclusion{width: 668px; overflow: scroll;}
+                    
                 </style>
                 <style type="text/css">
                     rect{
@@ -154,6 +151,7 @@
                                                 <div>
                                                     <xsl:apply-templates select="GeneralCadastralWorks"/>
                                                     <xsl:apply-templates select="InputData"/>
+                                                    <!--<xsl:apply-templates select="Survey"/>-->
                                                 </div>
                                             </th>
                                         </tr>
@@ -373,21 +371,21 @@
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Исходные данные'"/>
         </xsl:call-template>
-        <table class="tbl_section_sheet_header">
-            <tbody>
-                <tr>
-                    <th colspan="3" class="left">
-                        <b>1. Перечень документов, использованных при подготовке технического плана</b>
-                    </th>
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
                     <tr>
-                        <th class="col5mm">№<br/>п/п</th>
-                        <th class="col105mm">Наименование документа</th>
-                        <th>Реквизиты документа</th>
+                        <th colspan="3" class="left">
+                            <b>1. Перечень документов, использованных при подготовке технического плана</b>
+                        </th>
+                        <tr>
+                            <th class="col5mm">№<br/>п/п</th>
+                            <th class="col105mm">Наименование документа</th>
+                            <th>Реквизиты документа</th>
+                        </tr>
                     </tr>
-                </tr>
-            </tbody>                        
-        </table>
-        <table class="tbl_section_sheet_data">
+                </table>
+            </caption>            
             <thead>                
                 <tr>
                     <th class="col5mm">1</th>
@@ -395,21 +393,234 @@
                     <th>3</th>
                 </tr>
             </thead>
-            <tbody>                
-                <xsl:apply-templates select="Documents">
-                    <xsl:with-param name="printRow" select="number(6)"/>
-                </xsl:apply-templates>
+            <tbody>
+                <xsl:apply-templates select="Documents"/>                
+            </tbody>                       
+        </table>
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="8" class="left">
+                            <b>2. Сведения о геодезической основе, использованной при подготовке технического плана
+                                <div>
+                                    <xsl:text>Система координат </xsl:text>
+                                    <ins>
+                                        <xsl:for-each select="preceding-sibling::CoordSystems/CoordSystem">
+                                            <xsl:value-of select="@Name"/>
+                                            <xsl:if test="position() != last()">
+                                                <xsl:text>, </xsl:text>
+                                            </xsl:if>
+                                        </xsl:for-each>                                    
+                                    </ins>
+                                </div>
+                            </b>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th rowspan="2" class="col5mm">№<br/>п/п</th>
+                        <th rowspan="2">Название пункта и тип знака геодезической сети</th>
+                        <th rowspan="2" class="col25mm">Класс геодезической сети</th>
+                        <th colspan="2" class="col40mm">Координаты, м</th>
+                        <th colspan="3" class="col60mm">Сведения о состоянии на <input type="text" id="date_center"/></th>
+                    </tr>
+                    <tr>
+                        <th class="col20mm">X</th>
+                        <th class="col20mm">Y</th>
+                        <th class="col20mm">наружного знака пункта</th>
+                        <th class="col20mm">центра пункта</th>
+                        <th class="col20mm">марки</th>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
+                <tr>
+                    <th class="col5mm">1</th>
+                    <th>2</th>
+                    <th class="col25mm">3</th>
+                    <th class="col20mm">4</th>
+                    <th class="col20mm">5</th>
+                    <th class="col20mm">6</th>
+                    <th class="col20mm">7</th>
+                    <th class="col20mm">8</th>
+                </tr>
+            </thead>
+            <tbody>
+                <xsl:apply-templates select="GeodesicBases"/>
             </tbody>
         </table>
-
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="4" class="left">
+                            <b>3. Сведения о средствах измерений</b>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col5mm">№<br/>п/п</th>
+                        <th class="col55mm">Наименование прибора (инструмента, аппаратуры)</th>
+                        <th class="col55mm">Сведения об утверждении типа средств измерений</th>
+                        <th>Реквизиты свидетельства о поверке прибора (инструмента, аппаратуры)</th>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
+                <tr>
+                    <th class="col5mm">1</th>
+                    <th class="col55mm">2</th>
+                    <th class="col55mm">3</th>
+                    <th>4</th>
+                </tr>
+            </thead>
+            <tbody>                
+                <xsl:apply-templates select="MeansSurvey"/>
+            </tbody>
+        </table>
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="3" class="left">
+                            <b>4. Сведения о наличии объектов недвижимости на исходных земельных участках</b>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col5mm">№<br/>п/п</th>
+                        <th class="col55mm">Кадастровый номер земельного участка</th>
+                        <th>Кадастровые или иные номера объектов недвижимости, расположенных на земельном участке</th>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
+                <tr>
+                    <td class="col5mm">1</td>
+                    <td class="col55mm">2</td>
+                    <td>3</td>
+                </tr>
+            </thead>
+            <tbody>
+                <xsl:choose>
+                    <xsl:when test="ObjectsRealty">
+                        <xsl:apply-templates select="ObjectsRealty"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <tr>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                        </tr>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </tbody>
+        </table>
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="3" class="left">
+                            <b>5. Сведения о частях исходных или уточняемых земельных участках</b>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col5mm">№<br/>п/п</th>
+                        <th class="col55mm">Кадастровый номер земельного участка</th>
+                        <th>Учетные номера частей земельного участка</th>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
+                <tr>
+                    <td class="col5mm">1</td>
+                    <td class="col55mm">2</td>
+                    <td>3</td>
+                </tr>
+            </thead>
+            <tbody>
+                <xsl:choose>
+                    <xsl:when test="ObjectsRealty">
+                        <xsl:apply-templates select="ObjectsRealty"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <tr>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                        </tr>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </tbody>
+        </table>
         
     </xsl:template>
-
+<!--    <xsl:template match="Survey">
+        <xsl:call-template name="header1">
+            <xsl:with-param name="text1" select="'Сведения о выполненных измерениях и расчетах'"/>
+        </xsl:call-template>
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <tbody>
+                <tr>
+                    <th colspan="4" class="left">
+                        <b>4. Точность определения площади земельных участков</b>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="col5mm">№<br/>п/п</th>
+                    <th class="col50mm">Кадастровый номер или обозначение земельного участка</th>
+                    <th class="col25mm">Площадь(Р), м²</th>
+                    <th>Формулы, примененные для расчета предельной допустимой погрешности определения площади земельного участка(∆Р), м²</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <xsl:apply-templates select="TochnAreaParcels"/>
+            </tbody>
+        </table>        
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <tbody>
+                <tr>
+                    <th colspan="5" class="left">
+                        <b>5. Точность определения площади частей земельных участков</b>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="col5mm">№<br/>п/п</th>
+                    <th class="col50mm">Кадастровый номер или обозначение земельного участка</th>
+                    <th class="col30mm">Учетный номер или обозначение части</th>
+                    <th class="col25mm">Площадь(Р), м²</th>
+                    <th>Формулы, примененные для расчета предельной допустимой погрешности определения площади земельного участка(∆Р), м²</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+                <xsl:choose>
+                    <xsl:when test="TochnAreaSubParcels">
+                        <xsl:apply-templates select="TochnAreaSubParcels"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <tr>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                        </tr>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </tbody>
+        </table>
+    </xsl:template>-->
 
 
     <!-- *******************InputData************************* -->    
     <xsl:template match="Documents">
-        <xsl:param name="printRow"/>
         <xsl:for-each select="Document">
             <tr>
                 <td>
@@ -427,7 +638,126 @@
             </tr>
         </xsl:for-each>
     </xsl:template>
-   
+    <xsl:template match="GeodesicBases">
+        <xsl:for-each select="GeodesicBase">
+            <tr>
+                <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td class="left">
+                    <xsl:value-of select="concat(PName, ', ', PKind)"/>
+                </td>
+                <td>
+                    <xsl:value-of select="PKlass"/>
+                </td>
+                <td>
+                    <xsl:value-of select="OrdX"/>
+                </td>
+                <td>
+                    <xsl:value-of select="OrdY"/>
+                </td>
+                <td>
+                    <xsl:value-of select="'сохраненно'"/>
+                </td>
+                <td>
+                    <xsl:value-of select="'сохраненно'"/>
+                </td>
+                <td>
+                    <xsl:value-of select="'сохраненно'"/>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="MeansSurvey">
+        <xsl:for-each select="MeanSurvey">
+            <tr>
+                <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td>
+                    <xsl:value-of select="Name"/>
+                </td>
+                <td>
+                    <xsl:value-of select="concat(Registration/Number, ', ', Registration/Duration)"/>
+                </td>
+                <td>
+                    <xsl:value-of select="CertificateVerification"/>
+                </td>
+            </tr>
+        </xsl:for-each>       
+    </xsl:template>
+    <xsl:template match="ObjectsRealty">
+        <xsl:for-each select="ObjectRealty">
+            <tr>
+                <td>
+                    <xsl:value-of select="CadastralNumberParcel"/>
+                </td>
+                <td>
+                    <xsl:for-each select="InnerCadastralNumbers/CadastralNumber">
+                        <xsl:value-of select="."/>
+                        <xsl:choose>
+                            <xsl:when test="position() != last()">
+                                <xsl:value-of select="', '"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:if test="OldNumbers">
+                                    <xsl:value-of select="', '"/>
+                                </xsl:if>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each>
+                    <xsl:for-each select="OldNumbers/OldNumber">
+                        <xsl:if test="position() != last()">
+                            <xsl:value-of select="', '"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
+
+    <!-- *********************Survey************************** -->
+    <xsl:template match="TochnAreaParcels">
+        <xsl:for-each select="TochnAreaParcel">
+            <tr>
+                <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td class="left">
+                    <xsl:value-of select="CadastralNumberDefinition"/>
+                </td>
+                <td>
+                    <xsl:value-of select="Area/Area"/>
+                </td>
+                <td class="left">
+                    <xsl:value-of select="Formula"/>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="TochnAreaSubParcels">
+        <xsl:for-each select="TochnAreaSubParcel">
+            <tr>
+                <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td class="left">
+                    <xsl:value-of select="CadastralNumberDefinition"/>
+                </td>
+                <td>
+                    <xsl:value-of select="NumberRecordDefinition"/>
+                </td>
+                <td>
+                    <xsl:value-of select="Area/Area"/>
+                </td>
+                <td class="left">
+                    <xsl:value-of select="Formula"/>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
+    
+
 
 
     <xsl:template name="newPage">
