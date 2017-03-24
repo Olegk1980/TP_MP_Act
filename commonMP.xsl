@@ -151,7 +151,7 @@
                                                 <div>
                                                     <xsl:apply-templates select="GeneralCadastralWorks"/>
                                                     <xsl:apply-templates select="InputData"/>
-                                                    <!--<xsl:apply-templates select="Survey"/>-->
+                                                    <xsl:apply-templates select="Survey"/>
                                                 </div>
                                             </th>
                                         </tr>
@@ -550,56 +550,200 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </tbody>
-        </table>
-        
+        </table>        
     </xsl:template>
-<!--    <xsl:template match="Survey">
+    <xsl:template match="Survey">
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Сведения о выполненных измерениях и расчетах'"/>
         </xsl:call-template>
         <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="3" class="left">
+                            <b>1. Метод определения координат характерных точек границ земельных участков и их
+                                частей</b>
+                        </th>
+                        <tr>
+                            <th class="col5mm">№<br/>п/п</th>
+                            <th class="col55mm">Кадастровый номер или обозначение земельного участка, частей земельного
+                                участка</th>
+                            <th>Метод определения координат</th>
+                        </tr>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
+                <tr>
+                    <th class="col5mm">1</th>
+                    <th class="col55mm">2</th>
+                    <th>3</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr>
-                    <th colspan="4" class="left">
-                        <b>4. Точность определения площади земельных участков</b>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="col5mm">№<br/>п/п</th>
-                    <th class="col50mm">Кадастровый номер или обозначение земельного участка</th>
-                    <th class="col25mm">Площадь(Р), м²</th>
-                    <th>Формулы, примененные для расчета предельной допустимой погрешности определения площади земельного участка(∆Р), м²</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <xsl:apply-templates select="TochnAreaParcels"/>
+                <xsl:choose>
+                    <xsl:when test="GeopointsOpred">
+                        <xsl:apply-templates select="GeopointsOpred"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <tr>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                        </tr>
+                    </xsl:otherwise>
+                </xsl:choose>                                
             </tbody>
         </table>        
         <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="3" class="left">
+                            <b>2. Точность положения характерных точек границ земельных участков</b>
+                        </th>
+                        <tr>
+                            <th class="col5mm">№<br/>п/п</th>
+                            <th class="col55mm">Кадастровый номер или обозначение земельного участка, частей земельного
+                                участка</th>
+                            <th>Формулы, примененные для расчета средней квадратической погрешности
+                                положения характерных точек границ (Mt),м</th>
+                        </tr>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
+                <tr>
+                    <th class="col5mm">1</th>
+                    <th class="col55mm">2</th>
+                    <th>3</th>
+                </tr>
+            </thead>
             <tbody>
+                <xsl:choose>
+                    <xsl:when test="TochnGeopointsParcels">
+                        <xsl:apply-templates select="TochnGeopointsParcels"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <tr>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                        </tr>
+                    </xsl:otherwise>
+                </xsl:choose>                                
+            </tbody>
+        </table>        
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="4" class="left">
+                            <b>3. Точность положения характерных точек границ частей земельных участков</b>
+                        </th>
+                        <tr>
+                            <th class="col5mm">№<br/>п/п</th>
+                            <th class="col55mm">Кадастровый номер или обозначение земельного участка</th>
+                            <th class="col30mm">Учетный номер или обозначение части</th>
+                            <th>Формулы, примененные для расчета средней квадратической погрешности
+                                положения характерных точек границ (Mt),м</th>
+                        </tr>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
                 <tr>
-                    <th colspan="5" class="left">
-                        <b>5. Точность определения площади частей земельных участков</b>
-                    </th>
+                    <th class="col5mm">1</th>
+                    <th class="col55mm">2</th>
+                    <th class="col30mm">3</th>
+                    <th>4</th>
                 </tr>
+            </thead>
+            <tbody>
+                <xsl:choose>
+                    <xsl:when test="TochnGeopointsSubParcels">
+                        <xsl:apply-templates select="TochnGeopointsSubParcels"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <tr>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                        </tr>
+                    </xsl:otherwise>
+                </xsl:choose>                                
+            </tbody>
+        </table>
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="4" class="left">
+                            <b>4. Точность определения площади земельных участков</b>
+                        </th>
+                        <tr>
+                            <th class="col5mm">№<br/>п/п</th>
+                            <th class="col55mm">Кадастровый номер или обозначение земельного участка</th>
+                            <th class="col25mm">Площадь(Р), м²</th>
+                            <th>Формулы, примененные для расчета предельной допустимой погрешности
+                                определения площади земельного участка(∆Р), м²</th>
+                        </tr>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
                 <tr>
-                    <th class="col5mm">№<br/>п/п</th>
-                    <th class="col50mm">Кадастровый номер или обозначение земельного участка</th>
-                    <th class="col30mm">Учетный номер или обозначение части</th>
-                    <th class="col25mm">Площадь(Р), м²</th>
-                    <th>Формулы, примененные для расчета предельной допустимой погрешности определения площади земельного участка(∆Р), м²</th>
+                    <th class="col5mm">1</th>
+                    <th class="col55mm">2</th>
+                    <th class="col25mm">3</th>
+                    <th>4</th>
                 </tr>
+            </thead>
+            <tbody>
+                <xsl:choose>
+                    <xsl:when test="TochnAreaParcels">
+                        <xsl:apply-templates select="TochnAreaParcels"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <tr>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                        </tr>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </tbody>
+        </table>        
+        <table class="tbl_section_sheet_data tbl_border_bottom">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="5" class="left">
+                            <b>5. Точность определения площади частей земельных участков</b>
+                        </th>
+                        <tr>
+                            <th class="col5mm">№<br/>п/п</th>
+                            <th class="col55mm">Кадастровый номер или обозначение земельного участка</th>
+                            <th class="col30mm">Учетный номер или обозначение части</th>
+                            <th class="col25mm">Площадь(Р), м²</th>
+                            <th>Формулы, примененные для расчета предельной допустимой погрешности
+                                определения площади земельного участка(∆Р), м²</th>
+                        </tr>
+                    </tr>
+                </table>
+            </caption>
+            <thead>
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
+                    <th class="col5mm">1</th>
+                    <th class="col55mm">2</th>
+                    <th class="col30mm">3</th>
+                    <th class="col25mm">4</th>
+                    <th>5</th>
                 </tr>
+            </thead>
+            <tbody>
                 <xsl:choose>
                     <xsl:when test="TochnAreaSubParcels">
                         <xsl:apply-templates select="TochnAreaSubParcels"/>
@@ -616,8 +760,7 @@
                 </xsl:choose>
             </tbody>
         </table>
-    </xsl:template>-->
-
+    </xsl:template>
 
     <!-- *******************InputData************************* -->    
     <xsl:template match="Documents">
@@ -734,19 +877,77 @@
         </xsl:for-each>
     </xsl:template>
     <!-- *********************Survey************************** -->
+    <xsl:template match="GeopointsOpred">
+        <xsl:for-each select="GeopointOpred">
+            <tr>
+                <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td>
+                    <xsl:value-of select="CadastralNumberDefinition"/>
+                </td>
+                <td>
+                    <xsl:for-each select="Methods">
+                        <xsl:variable name="gpOpred" select="document(concat($urlPrefixDict, 'dGeopointOpred_v01.xsd'))"/>
+                        <xsl:variable name="code" select="GeopointOpred"/>
+                        <xsl:value-of select="$gpOpred//xs:enumeration[@value = $code]/xs:annotation/xs:documentation"/>
+                        <xsl:if test="GeopointOpredDescription">
+                            <xsl:value-of select="concat(' (',GeopointOpredDescription,')')"/>
+                        </xsl:if>
+                        <xsl:if test="position() != last()">
+                            <xsl:value-of select="', '"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="TochnGeopointsParcels">
+        <xsl:for-each select="TochnGeopointsParcel">
+            <tr>
+                <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td>
+                    <xsl:value-of select="CadastralNumberDefinition"/>
+                </td>
+                <td>
+                    <xsl:value-of select="Formula"/>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="TochnGeopointsSubParcels">
+        <xsl:for-each select="TochnGeopointsSubParcel">
+            <tr>
+                <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td>
+                    <xsl:value-of select="CadastralNumberDefinition"/>
+                </td>
+                <td>
+                    <xsl:value-of select="NumberRecordDefinition"/>
+                </td>
+                <td>
+                    <xsl:value-of select="Formula"/>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
     <xsl:template match="TochnAreaParcels">
         <xsl:for-each select="TochnAreaParcel">
             <tr>
                 <td>
                     <xsl:value-of select="position()"/>
                 </td>
-                <td class="left">
+                <td>
                     <xsl:value-of select="CadastralNumberDefinition"/>
                 </td>
                 <td>
                     <xsl:value-of select="Area/Area"/>
                 </td>
-                <td class="left">
+                <td>
                     <xsl:value-of select="Formula"/>
                 </td>
             </tr>
