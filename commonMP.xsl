@@ -538,8 +538,8 @@
             </thead>
             <tbody>
                 <xsl:choose>
-                    <xsl:when test="ObjectsRealty">
-                        <xsl:apply-templates select="ObjectsRealty"/>
+                    <xsl:when test="SubParcels">
+                        <xsl:apply-templates select="SubParcels"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <tr>
@@ -690,6 +690,9 @@
         <xsl:for-each select="ObjectRealty">
             <tr>
                 <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td>
                     <xsl:value-of select="CadastralNumberParcel"/>
                 </td>
                 <td>
@@ -715,7 +718,21 @@
             </tr>
         </xsl:for-each>
     </xsl:template>
-
+    <xsl:template match="SubParcels">
+        <xsl:for-each select="SubParcel">
+            <tr>
+                <td>
+                    <xsl:value-of select="position()"/>
+                </td>
+                <td>
+                    <xsl:value-of select="CadastralNumberParcel"/>
+                </td>
+                <td>
+                    <xsl:value-of select="NumberRecord"/>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
     <!-- *********************Survey************************** -->
     <xsl:template match="TochnAreaParcels">
         <xsl:for-each select="TochnAreaParcel">
