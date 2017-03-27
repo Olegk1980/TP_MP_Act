@@ -45,7 +45,6 @@
                         body{color:#000;font-family:times new roman, arial, sans-serif;text-align:center}
                         table{border:0; width:180mm; margin-left:auto; margin-right:auto; border-collapse:collapse;empty-cells:show}
                         table.tbl_container{width:100%;border-collapse:collapse;border:0;padding:1px}
-                        tr{page-break-inside: avoid;}
                         th{color:#000;font-family:times new roman, arial, sans-serif;font-size:10pt;font-weight:400;text-align:center;}
                         td{color:#000;font-family:times new roman, arial, sans-serif;font-size:10pt;font-weight:400;text-align:center;}                        
                         span.center{text-align:center}
@@ -109,7 +108,7 @@
                         .tbl_section_sheet_data th.col80mm,.tbl_section_sheet_data td.col80mm{width: 80mm}
                         .tbl_section_sheet_data th.col105mm,.tbl_section_sheet_data td.col105mm{width: 105mm}
                         
-                        DIV.conclusion{width: 176mm; overflow: scroll;}                      
+                        DIV.conclusion{overflow: scroll;word-break: break-all;}                      
                     </style>
                 <style type="text/css">
                     rect{
@@ -992,7 +991,7 @@
             <xsl:with-param name="node" select="."/>
         </xsl:call-template>
     </xsl:template>
-    <xsl:template name="Characteristics">
+    <xsl:template name="Characteristics">        
         <xsl:param name="node"/>
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Характеристики объекта недвижимости'"/>
