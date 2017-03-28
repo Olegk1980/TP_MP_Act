@@ -149,6 +149,20 @@
                                                     <xsl:apply-templates select="GeneralCadastralWorks"/>
                                                     <xsl:apply-templates select="InputData"/>
                                                     <xsl:apply-templates select="Survey"/>
+                                                    <xsl:choose>
+                                                        <xsl:when test="Package/FormParcels">
+                                                            
+                                                        </xsl:when>
+                                                        <xsl:when test="Package/SpecifyParcel">
+                                                            
+                                                        </xsl:when>
+                                                        <xsl:when test="Package/SubParcels">
+                                                            
+                                                        </xsl:when>
+                                                        <xsl:when test="Package/SpecifyParcelsApproximal">
+                                                            
+                                                        </xsl:when>
+                                                    </xsl:choose>
                                                 </div>
                                             </th>
                                         </tr>
@@ -758,6 +772,7 @@
             </tbody>
         </table>
     </xsl:template>
+    
 
     <!-- *******************InputData************************* -->    
     <xsl:template match="Documents">

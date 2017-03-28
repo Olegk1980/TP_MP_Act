@@ -1565,166 +1565,152 @@
     <xsl:template name="GenerateMap">
         <xsl:param name="entitySpatial"/>
         <xsl:call-template name="newPage"/>
-        <table class="tbl_container notprint">
-            <tbody>
-                <tr>
-                    <td>
-                        <xsl:call-template name="header1">
-                            <xsl:with-param name="text1" select="'Сгенерированная карта'"/>
-                        </xsl:call-template>
-                        <table class="tbl_section_sheet">
-                            <tbody>
-                                <tr>
-                                    <td style="text-align: left;">
-                                        <svg width="668" height="920"/>
-                                        <xsl:variable name="yMin">
-                                            <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@Y | //NewConstruction/EntitySpatial/*//Ordinate/@Y | //ExistBuilding/EntitySpatial/*//Ordinate/@Y | //ExistConstruction/EntitySpatial/*//Ordinate/@Y">
-                                                <xsl:sort select="." data-type="number" order="ascending"/>
-                                                <xsl:if test="position() = 1">
-                                                    <xsl:value-of select="."/>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                        </xsl:variable>
-                                        <xsl:variable name="xMin">
-                                            <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@X | //NewConstruction/EntitySpatial/*//Ordinate/@X | //ExistBuilding/EntitySpatial/*//Ordinate/@X | //ExistConstruction/EntitySpatial/*//Ordinate/@X">
-                                                <xsl:sort select="." data-type="number" order="ascending"/>
-                                                <xsl:if test="position() = 1">
-                                                    <xsl:value-of select="."/>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                        </xsl:variable>
-                                        <xsl:variable name="yMax">
-                                            <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@Y | //NewConstruction/EntitySpatial/*//Ordinate/@Y | //ExistBuilding/EntitySpatial/*//Ordinate/@Y | //ExistConstruction/EntitySpatial/*//Ordinate/@Y">
-                                                <xsl:sort select="." data-type="number" order="descending"/>
-                                                <xsl:if test="position() = 1">
-                                                    <xsl:value-of select="."/>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                        </xsl:variable>
-                                        <xsl:variable name="xMax">
-                                            <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@X | //NewConstruction/EntitySpatial/*//Ordinate/@X | //ExistBuilding/EntitySpatial/*//Ordinate/@X | //ExistConstruction/EntitySpatial/*//Ordinate/@X">
-                                                <xsl:sort select="." data-type="number" order="descending"/>
-                                                <xsl:if test="position() = 1">
-                                                    <xsl:value-of select="."/>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                        </xsl:variable>
-                                        <script>
-                                            var json = {"type":"FeatureCollection","features":[
-                                            <xsl:for-each select="//NewBuilding/EntitySpatial/SpatialElement | //NewConstruction/EntitySpatial/SpatialElement | //ExistBuilding/EntitySpatial/SpatialElement | //ExistConstruction/EntitySpatial/SpatialElement">
-                                                <xsl:choose>
-                                                    <!-- Точка -->
-                                                    <xsl:when test="SpelementUnit/@TypeUnit = 'Окружность'">
-                                                        <xsl:for-each select="SpelementUnit">
-                                                            <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                                                            <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;},'"/>
-                                                            <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
-                                                            <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
-                                                            <xsl:value-of select="',&quot;radius&quot;:'"/> 
-                                                            <xsl:value-of select="R"/>
-                                                            <xsl:value-of select="'}}'"/>
-                                                            <xsl:if test="not(position() = last())">
-                                                                <xsl:value-of select="','"/>
-                                                            </xsl:if>
-                                                        </xsl:for-each>                                        
-                                                    </xsl:when>
-                                                    <!-- Полилиния -->
-                                                    <xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y | SpelementUnit[1]/Ordinate/@NumGeopoint = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y | SpelementUnit[last()]/Ordinate/@NumGeopoint)">
-                                                        <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                                                        <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polylines&quot;},'"/>
-                                                        <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;LineString&quot;,&quot;coordinates&quot;:['"/>
-                                                        <xsl:for-each select="SpelementUnit">                                            
-                                                            <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
-                                                            <xsl:if test="not(position() = last())">
-                                                                <xsl:value-of select="','"/>
-                                                            </xsl:if>
-                                                        </xsl:for-each>
-                                                        <xsl:value-of select="']}}'"/>                                        
-                                                    </xsl:when>
-                                                    <!-- Полигон -->
-                                                    <xsl:otherwise>
-                                                        <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                                                        <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polygons&quot;},'"/>
-                                                        <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[['"/>
-                                                        <xsl:for-each select="SpelementUnit">                                            
-                                                            <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
-                                                            <xsl:if test="not(position() = last())">
-                                                                <xsl:value-of select="','"/>
-                                                            </xsl:if>
-                                                        </xsl:for-each>                                            
-                                                        <xsl:value-of select="']]}}'"/> 
-                                                    </xsl:otherwise>
-                                                </xsl:choose>
-                                                <xsl:if test="not(position() = last())">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>]};</xsl:text>                            
-                                            
-                                            <xsl:value-of select="concat('var yAvg = ', $yMin + (($yMax - $yMin) div 2),';')"/>
-                                            <xsl:value-of select="concat('var xAvg = ', $xMax + (($xMin - $xMax) div 2),';')"/>
-                                            <xsl:choose>
-                                                <xsl:when test="($yMax - $yMin) &gt; 680">
-                                                    <xsl:value-of select="concat('var scaleMx = ', 1,';')"/>
-                                                    <xsl:value-of select="concat('var scaleEx = ', ($xMax - $xMin) div 920,';')"/>
-                                                </xsl:when>
-                                                <xsl:otherwise>
-                                                    <xsl:value-of select="concat('var scaleEx = ', 2,';')"/>
-                                                    <xsl:value-of select="concat('var scaleMx = ', floor(680 div ($yMax - $yMin)),';')"/>
-                                                </xsl:otherwise>
-                                            </xsl:choose>
-                                            
-                                            var svg = d3.select("svg");
-                                            var width = +svg.attr("width");
-                                            var height = +svg.attr("height");
-                                            
-                                            var path = d3.geoPath()
-                                            .projection(matrix(scaleMx, 0, 0, -scaleMx, (width/2)-(yAvg*scaleMx), (height/2)+(xAvg*scaleMx)));
-                                            function matrix(a, b, c, d, tx, ty) {
-                                            return d3.geoTransform({
-                                            point: function(x, y) {
-                                            this.stream.point(a * x + b * y + tx, c * x + d * y + ty);
-                                            }
-                                            });
-                                            }    
-                                            
-                                            var g = svg.append("g");                            
-                                            svg.append("rect")
-                                            .attr("width", width)
-                                            .attr("height", height)
-                                            .call(d3.zoom()
-                                            .scaleExtent([1 / scaleEx, 5])
-                                            .on("zoom", function () {
-                                            g.attr("transform", d3.event.transform);
-                                            }));
-                                            
-                                            var polygon = json.features.filter(function(d) { return d.properties.ObjectType === "polygons";});
-                                            g.selectAll(".polygons")
-                                            .data(polygon)
-                                            .enter().append("path")
-                                            .attr("class", "polygons")
-                                            .attr("d", path);
-                                            var point = json.features.filter(function(d) { return d.properties.ObjectType === "points";});
-                                            g.selectAll(".points")
-                                            .data(point)
-                                            .enter().append("path")
-                                            .attr("class", "points")
-                                            .attr("d", path);           
-                                            var polyline = json.features.filter(function(d) { return d.properties.ObjectType === "polylines";});
-                                            g.selectAll(".polylines")
-                                            .data(polyline)
-                                            .enter().append("path")
-                                            .attr("class", "polylines")
-                                            .attr("d", path);                                
-                                        </script>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="notprint">
+            <xsl:call-template name="header1">
+                <xsl:with-param name="text1" select="'Сгенерированная карта'"/>
+            </xsl:call-template>
+            <svg width="1024" height="800"/>
+            <xsl:variable name="yMin">
+                <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@Y | //NewConstruction/EntitySpatial/*//Ordinate/@Y | //ExistBuilding/EntitySpatial/*//Ordinate/@Y | //ExistConstruction/EntitySpatial/*//Ordinate/@Y">
+                    <xsl:sort select="." data-type="number" order="ascending"/>
+                    <xsl:if test="position() = 1">
+                        <xsl:value-of select="."/>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:variable name="xMin">
+                <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@X | //NewConstruction/EntitySpatial/*//Ordinate/@X | //ExistBuilding/EntitySpatial/*//Ordinate/@X | //ExistConstruction/EntitySpatial/*//Ordinate/@X">
+                    <xsl:sort select="." data-type="number" order="ascending"/>
+                    <xsl:if test="position() = 1">
+                        <xsl:value-of select="."/>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:variable name="yMax">
+                <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@Y | //NewConstruction/EntitySpatial/*//Ordinate/@Y | //ExistBuilding/EntitySpatial/*//Ordinate/@Y | //ExistConstruction/EntitySpatial/*//Ordinate/@Y">
+                    <xsl:sort select="." data-type="number" order="descending"/>
+                    <xsl:if test="position() = 1">
+                        <xsl:value-of select="."/>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:variable name="xMax">
+                <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@X | //NewConstruction/EntitySpatial/*//Ordinate/@X | //ExistBuilding/EntitySpatial/*//Ordinate/@X | //ExistConstruction/EntitySpatial/*//Ordinate/@X">
+                    <xsl:sort select="." data-type="number" order="descending"/>
+                    <xsl:if test="position() = 1">
+                        <xsl:value-of select="."/>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:variable>
+            <script>
+                var json = {"type":"FeatureCollection","features":[
+                <xsl:for-each select="//NewBuilding/EntitySpatial/SpatialElement | //NewConstruction/EntitySpatial/SpatialElement | //ExistBuilding/EntitySpatial/SpatialElement | //ExistConstruction/EntitySpatial/SpatialElement">
+                    <xsl:choose>
+                        <!-- Точка -->
+                        <xsl:when test="SpelementUnit/@TypeUnit = 'Окружность'">
+                            <xsl:for-each select="SpelementUnit">
+                                <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                                <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;},'"/>
+                                <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
+                                <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
+                                <xsl:value-of select="',&quot;radius&quot;:'"/> 
+                                <xsl:value-of select="R"/>
+                                <xsl:value-of select="'}}'"/>
+                                <xsl:if test="not(position() = last())">
+                                    <xsl:value-of select="','"/>
+                                </xsl:if>
+                            </xsl:for-each>                                        
+                        </xsl:when>
+                        <!-- Полилиния -->
+                        <xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y | SpelementUnit[1]/Ordinate/@NumGeopoint = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y | SpelementUnit[last()]/Ordinate/@NumGeopoint)">
+                            <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                            <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polylines&quot;},'"/>
+                            <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;LineString&quot;,&quot;coordinates&quot;:['"/>
+                            <xsl:for-each select="SpelementUnit">                                            
+                                <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
+                                <xsl:if test="not(position() = last())">
+                                    <xsl:value-of select="','"/>
+                                </xsl:if>
+                            </xsl:for-each>
+                            <xsl:value-of select="']}}'"/>                                        
+                        </xsl:when>
+                        <!-- Полигон -->
+                        <xsl:otherwise>
+                            <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                            <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polygons&quot;},'"/>
+                            <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[['"/>
+                            <xsl:for-each select="SpelementUnit">                                            
+                                <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
+                                <xsl:if test="not(position() = last())">
+                                    <xsl:value-of select="','"/>
+                                </xsl:if>
+                            </xsl:for-each>                                            
+                            <xsl:value-of select="']]}}'"/> 
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:if test="not(position() = last())">
+                        <xsl:text>, </xsl:text>
+                    </xsl:if>
+                </xsl:for-each>
+                <xsl:text>]};</xsl:text>                            
+                
+                <xsl:value-of select="concat('var yAvg = ', $yMin + (($yMax - $yMin) div 2),';')"/>
+                <xsl:value-of select="concat('var xAvg = ', $xMax + (($xMin - $xMax) div 2),';')"/>
+                <xsl:choose>
+                    <xsl:when test="($yMax - $yMin) &gt; 1024">
+                        <xsl:value-of select="concat('var scaleMx = ', 1,';')"/>
+                        <xsl:value-of select="concat('var scaleEx = ', ($xMax - $xMin) div 800,';')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('var scaleEx = ', 2,';')"/>
+                        <xsl:value-of select="concat('var scaleMx = ', floor(1024 div ($yMax - $yMin)),';')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                
+                var svg = d3.select("svg");
+                var width = +svg.attr("width");
+                var height = +svg.attr("height");
+                
+                var path = d3.geoPath()
+                .projection(matrix(scaleMx, 0, 0, -scaleMx, (width/2)-(yAvg*scaleMx), (height/2)+(xAvg*scaleMx)));
+                function matrix(a, b, c, d, tx, ty) {
+                return d3.geoTransform({
+                point: function(x, y) {
+                this.stream.point(a * x + b * y + tx, c * x + d * y + ty);
+                }
+                });
+                }    
+                
+                var g = svg.append("g");                            
+                svg.append("rect")
+                .attr("width", width)
+                .attr("height", height)
+                .call(d3.zoom()
+                .scaleExtent([1 / scaleEx, 5])
+                .on("zoom", function () {
+                g.attr("transform", d3.event.transform);
+                }));
+                
+                var polygon = json.features.filter(function(d) { return d.properties.ObjectType === "polygons";});
+                g.selectAll(".polygons")
+                .data(polygon)
+                .enter().append("path")
+                .attr("class", "polygons")
+                .attr("d", path);
+                var point = json.features.filter(function(d) { return d.properties.ObjectType === "points";});
+                g.selectAll(".points")
+                .data(point)
+                .enter().append("path")
+                .attr("class", "points")
+                .attr("d", path);           
+                var polyline = json.features.filter(function(d) { return d.properties.ObjectType === "polylines";});
+                g.selectAll(".polylines")
+                .data(polyline)
+                .enter().append("path")
+                .attr("class", "polylines")
+                .attr("d", path);                                
+            </script>
+        </div>
     </xsl:template>
     
     <!-- *******************InputData************************* -->    
