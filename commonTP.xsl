@@ -58,6 +58,8 @@
                         span.undestroke{padding-left:4px;padding-right:4px;border-bottom:1px solid #000}
                         object{width: 100%; height: 920px;}
                         embed{width: 100%; height: 920px;}
+                        thead{display: table-header-group;}
+                        
                         .tbl_section_sheet{
                             border:3px double #000;
                             padding:1px;
@@ -110,7 +112,7 @@
                         .tbl_section_sheet_data th.col80mm,.tbl_section_sheet_data td.col80mm{width: 80mm}
                         .tbl_section_sheet_data th.col105mm,.tbl_section_sheet_data td.col105mm{width: 105mm}
                         
-                        DIV.conclusion{overflow: scroll;word-break: break-all;}
+                        div.conclusion{word-break: break-all;}
                         @media print{
                             .notprint{display:none}
                         }
@@ -1782,8 +1784,8 @@
     </xsl:template>
     <!-- *********************Survey************************** -->    
     <xsl:template match="GeopointsOpred">
-        <xsl:variable name="allContour" select="count(Element[generate-id(.) = generate-id(key('geopointElements', @Number)[1])])"/>
-        <xsl:for-each select="Element[generate-id(.) = generate-id(key('geopointElements', @Number)[1])]">
+        <!--<xsl:variable name="allContour" select="count(Element[generate-id(.) = generate-id(key('geopointElements', @Number)[1])])"/>-->
+        <!--<xsl:for-each select="Element[generate-id(.) = generate-id(key('geopointElements', @Number)[1])]">
             <xsl:variable name="firstNumGeopoint" select="@NumGeopoint"/>
             <xsl:variable name="lastNumGeopoint" select="key('geopointElements', @Number)[last()]/@NumGeopoint"/>
             <xsl:choose>
@@ -1825,18 +1827,75 @@
                     </tr>
                 </xsl:otherwise>
             </xsl:choose>
-        </xsl:for-each>
+        </xsl:for-each>-->
+        <xsl:for-each select="Element[generate-id(.) = generate-id(key('geopointElements', @Number)[1])]">
+            <xsl:variable name="firstNumGeopoint" select="@NumGeopoint"/>
+            <xsl:variable name="lastNumGeopoint" select="key('geopointElements', @Number)[last()]/@NumGeopoint"/>
+            <xsl:choose>
+                <xsl:when test="count(Element[generate-id(.) = generate-id(key('geopointElements', @Number)[1])]) != 1">
+                    <tr>
+                        <td>
+                            <xsl:choose>
+                                <xsl:when test="contains(@Number,'.')">
+                                    <xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="@Number"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td>
+                            <xsl:choose>
+                                <xsl:when test="$firstNumGeopoint = $lastNumGeopoint">
+                                    <xsl:value-of select="$firstNumGeopoint"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="concat($firstNumGeopoint,' - ',$lastNumGeopoint)"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td>
+                            <xsl:variable name="geopointOpred" select="document(concat($urlPrefixDict, 'dGeopointOpred_v01.xsd'))"/>
+                            <xsl:variable name="code" select="./GeopointOpred"/>
+                            <xsl:value-of select="concat(' (', $geopointOpred//xs:enumeration[@value = $code]/xs:annotation/xs:documentation,')')"/>
+                        </td>
+                    </tr>
+                </xsl:when>
+                <xsl:otherwise>
+                    <tr>
+                        <td>
+                            <xsl:call-template name="procherk"/>
+                        </td>
+                        <td>
+                            <xsl:value-of select="concat($firstNumGeopoint,' - ',$lastNumGeopoint)"/>
+                        </td>
+                        <td>
+                            <xsl:variable name="geopointOpred" select="document(concat($urlPrefixDict, 'dGeopointOpred_v01.xsd'))"/>
+                            <xsl:variable name="code" select="./GeopointOpred"/>
+                            <xsl:value-of select="concat(' (', $geopointOpred//xs:enumeration[@value = $code]/xs:annotation/xs:documentation,')')"/>
+                        </td>
+                    </tr>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>    
     </xsl:template>
     <xsl:template match="TochnGeopointsBuilding | TochnGeopointsConstruction | TochnGeopointsUncompleted">
-        <xsl:variable name="allContour" select="count(Element[generate-id(.) = generate-id(key('tochnGeopointElements', @Number)[1])])"/>
+        <!--<xsl:variable name="allContour" select="count(Element[generate-id(.) = generate-id(key('tochnGeopointElements', @Number)[1])])"/>-->
         <xsl:for-each select="Element[generate-id(.) = generate-id(key('tochnGeopointElements', @Number)[1])]">
             <xsl:variable name="firstNumGeopoint" select="@NumGeopoint"/>
             <xsl:variable name="lastNumGeopoint" select="key('tochnGeopointElements', @Number)[last()]/@NumGeopoint"/>
             <xsl:choose>
-                <xsl:when test="$allContour != 1">
+                <xsl:when test="count(Element[generate-id(.) = generate-id(key('geopointElements', @Number)[1])]) != 1">
                     <tr>
                         <td>
-                            <xsl:value-of select="concat(@Number,'/',$allContour)"/>
+                            <xsl:choose>
+                                <xsl:when test="contains(@Number,'.')">
+                                    <xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="@Number"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </td>
                         <td>
                             <xsl:choose>
@@ -1870,15 +1929,22 @@
         </xsl:for-each>        
     </xsl:template>
     <xsl:template match="TochnGeopointsSubBuilding | TochnGeopointsSubConstruction | TochnGeopointsSubUncompleted">
-        <xsl:variable name="allContour" select="count(Element[generate-id(.) = generate-id(key('tochnGeopointsSubElements', @Number)[1])])"/>
+        <!--<xsl:variable name="allContour" select="count(Element[generate-id(.) = generate-id(key('tochnGeopointsSubElements', @Number)[1])])"/>-->
         <xsl:for-each select="Element[generate-id(.) = generate-id(key('tochnGeopointsSubElements', @Number)[1])]">
             <xsl:variable name="firstNumGeopoint" select="@NumGeopoint"/>
             <xsl:variable name="lastNumGeopoint" select="key('tochnGeopointsSubElements', @Number)[last()]/@NumGeopoint"/>
             <xsl:choose>
-                <xsl:when test="$allContour != 1">
+                <xsl:when test="count(Element[generate-id(.) = generate-id(key('geopointElements', @Number)[1])]) != 1">
                     <tr>
                         <td>
-                            <xsl:value-of select="concat(@Number,'/',$allContour)"/>
+                            <xsl:choose>
+                                <xsl:when test="contains(@Number,'.')">
+                                    <xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="@Number"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </td>
                         <td>
                             <xsl:choose>
@@ -1934,10 +2000,29 @@
                     </xsl:when>
                 </xsl:choose>
             </xsl:variable>
+            <tr>
+                <td class="left" colspan="9">
+                    <xsl:choose>
+                        <xsl:when test="contains(@Number,'.')">
+                            <xsl:value-of select="'Внутренний контур'"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="'Внешний контур'"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </td>
+            </tr>
             <xsl:for-each select="SpelementUnit">
                 <tr>
                     <td>
-                        <xsl:value-of select="$num"/>
+                        <xsl:choose>
+                            <xsl:when test="contains($num,'.')">
+                                <xsl:value-of select="concat(substring-before($num,'.'),'/',substring-after($num,'/'))"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$num"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </td>
                     <td>
                         <xsl:value-of select="Ordinate/@NumGeopoint"/>
@@ -2012,7 +2097,7 @@
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
-    
+
     <xsl:template match="Address">
         <xsl:call-template name="tAddressInpFull">
             <xsl:with-param name="address" select="."></xsl:with-param>
