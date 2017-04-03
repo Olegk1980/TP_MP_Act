@@ -124,12 +124,24 @@
                     }
                     .points{
                         fill:green;
-                        stroke:black;
+                        stroke:green;
                     }
-                    .polylines{
+                    .polylines0{
                         fill:none;
                         stroke:black;
                         stroke-width:0.5;
+                    }
+                    .polylines1{
+                    fill:none;
+                    stroke:black;
+                    stroke-width:0.5;
+                    stroke-dasharray: 5,1,0.5,1,0.5,1;
+                    }
+                    .polylines2{
+                    fill:none;
+                    stroke:black;
+                    stroke-width:0.5;
+                    stroke-dasharray: 5,1,0.5,1;
                     }
                     .polygons{
                         fill:gray;
@@ -1610,23 +1622,18 @@
                     <xsl:choose>
                         <!-- Точка -->
                         <xsl:when test="SpelementUnit/@TypeUnit = 'Окружность'">
-                            <xsl:for-each select="SpelementUnit">
-                                <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                                <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;},'"/>
-                                <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
-                                <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
-                                <xsl:value-of select="',&quot;radius&quot;:'"/> 
-                                <xsl:value-of select="R"/>
-                                <xsl:value-of select="'}}'"/>
-                                <xsl:if test="not(position() = last())">
-                                    <xsl:value-of select="','"/>
-                                </xsl:if>
-                            </xsl:for-each>                                        
+                            <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;,&quot;Underground&quot;:',@Underground,'},')"/>
+                            <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
+                            <xsl:value-of select="concat('[',SpelementUnit/Ordinate/@Y,',',SpelementUnit/Ordinate/@X,']')"/>
+                            <xsl:value-of select="',&quot;radius&quot;:'"/> 
+                            <xsl:value-of select="SpelementUnit/R"/>
+                            <xsl:value-of select="'}}'"/>           
                         </xsl:when>
                         <!-- Полилиния -->
                         <xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y | SpelementUnit[1]/Ordinate/@NumGeopoint = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y | SpelementUnit[last()]/Ordinate/@NumGeopoint)">
                             <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                            <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polylines&quot;},'"/>
+                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polylines&quot;,&quot;Underground&quot;:',@Underground,'},')"/>
                             <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;LineString&quot;,&quot;coordinates&quot;:['"/>
                             <xsl:for-each select="SpelementUnit">                                            
                                 <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
@@ -1639,7 +1646,7 @@
                         <!-- Полигон -->
                         <xsl:otherwise>
                             <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                            <xsl:value-of select="'&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polygons&quot;},'"/>
+                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polygons&quot;,&quot;Underground&quot;:',@Underground,'},')"/>
                             <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[['"/>
                             <xsl:for-each select="SpelementUnit">                                            
                                 <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
@@ -1705,11 +1712,23 @@
                 .enter().append("path")
                 .attr("class", "points")
                 .attr("d", path);           
-                var polyline = json.features.filter(function(d) { return d.properties.ObjectType === "polylines";});
+                var polyline0 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 0});
                 g.selectAll(".polylines")
-                .data(polyline)
+                .data(polyline0)
                 .enter().append("path")
-                .attr("class", "polylines")
+                .attr("class", "polylines0")
+                .attr("d", path);
+                var polyline1 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 1});
+                g.selectAll(".polylines")
+                .data(polyline1)
+                .enter().append("path")
+                .attr("class", "polylines1")
+                .attr("d", path);
+                var polyline2 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 2});
+                g.selectAll(".polylines")
+                .data(polyline2)
+                .enter().append("path")
+                .attr("class", "polylines2")
                 .attr("d", path);                                
             </script>
         </div>
