@@ -40,11 +40,11 @@
             <head>
                 <title>Технический план</title>
                 <meta name="Content-Style-Type" content="text/css"/>
-                <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"/>
+                <script type="text/javascript" src="http://d3js.org/d3.v4.min.js"/>
                 <style type="text/css">
                         body{color:#000;font-family:times new roman, arial, sans-serif;text-align:center}
                         table{border:0; width:180mm; margin-left:auto; margin-right:auto; border-collapse:collapse;empty-cells:show}
-                        table.tbl_container{width:100%;border-collapse:collapse;border:0;padding:1px}
+                        table.tbl_container{border-collapse:collapse;border:0;padding:1px}
                         
                        
                         th{color:#000;font-family:times new roman, arial, sans-serif;font-size:10pt;font-weight:400;text-align:center;}
@@ -98,6 +98,7 @@
                         .tbl_section_sheet_data th.gborder0,.tbl_section_sheet_data td.gborder0{border-bottom: 0px;border-top: 0px;}
                         
                         .tbl_section_sheet_data th.col5mm,.tbl_section_sheet_data td.col5mm{width: 5mm}
+                        .tbl_section_sheet_data th.col7mm,.tbl_section_sheet_data td.col7mm{width: 7mm}
                         .tbl_section_sheet_data th.col7-5mm,.tbl_section_sheet_data td.col7-5mm{width: 7.5mm}
                         .tbl_section_sheet_data th.col10mm,.tbl_section_sheet_data td.col10mm{width: 10mm}
                         .tbl_section_sheet_data th.col15mm,.tbl_section_sheet_data td.col15mm{width: 15mm}
@@ -112,12 +113,14 @@
                         .tbl_section_sheet_data th.col80mm,.tbl_section_sheet_data td.col80mm{width: 80mm}
                         .tbl_section_sheet_data th.col105mm,.tbl_section_sheet_data td.col105mm{width: 105mm}
                         
+                        .fontsize8{font-size: 8pt;}
+                        
                         div.conclusion{word-break: break-all;}
                         @media print{
                             .notprint{display:none}
                         }
                     </style>
-                <style type="text/css">
+                <style type="text/css">                    
                     rect{
                         fill:none;
                         pointer-events:all;                    
@@ -143,12 +146,16 @@
                     stroke-width:0.5;
                     stroke-dasharray: 5,1,0.5,1;
                     }
+                    g.polygons{
+                    -webkit-filter: invert(100%);
+                    filter: invert(100%);
+                    }
                     .polygons{
                         fill:gray;
                         stroke:none;
                         stroke-width:0.1;
-                        mix-blend-mode: color-dodge;
-                    }
+                        mix-blend-mode: difference;
+                    }                    
                 </style>
                 <style type="text/css">
                     input{
@@ -172,12 +179,17 @@
                 </style>
             </head>
             <body>
-                <table>
+                <table>                    
                     <tbody>
                         <tr>
                             <th class="vtop">
-                                <table class="tbl_container">
+                                <table class="tbl_container">                                    
                                     <tbody>
+                                        <tr>
+                                            <td style="font-size: 7pt;">
+                                                <xsl:value-of select="//comment()"/>
+                                            </td>                            
+                                        </tr>
                                         <tr>
                                             <th>
                                                 <div>
@@ -744,7 +756,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th class="col15mm">Номер контура</th>
+                        <th class="col40mm">Номер контура</th>
                         <th class="col35mm">Номера характерных точек контура</th>
                         <th>Метод определения координат</th>
                     </tr>
@@ -752,7 +764,7 @@
             </caption>
             <thead>
                 <tr>
-                    <th class="col15mm">1</th>
+                    <th class="col40mm">1</th>
                     <th class="col35mm">2</th>
                     <th>3</th>
                 </tr>
@@ -781,7 +793,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th class="col15mm">Номер контура</th>
+                        <th class="col40mm">Номер контура</th>
                         <th class="col35mm">Номера характерных точек контура</th>
                         <th>Формулы, примененные для расчетасредней квадратической погрешности определения координат характерных точек контура(Mt),м</th>
                     </tr>
@@ -789,7 +801,7 @@
             </caption>
             <thead>
                 <tr>
-                    <th class="col15mm">1</th>
+                    <th class="col40mm">1</th>
                     <th class="col35mm">2</th>
                     <th>3</th>
                 </tr>
@@ -818,7 +830,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th class="col15mm">Номер контура</th>
+                        <th class="col40mm">Номер контура</th>
                         <th class="col35mm">Номера характерных точек контура</th>
                         <th class="col35mm">Учетный номер или обозначение части</th>
                         <th>Формулы, примененные для расчетасредней квадратической погрешности определения координат характерных точек контура(Mt),м</th>
@@ -827,7 +839,7 @@
             </caption>
             <thead>
                 <tr>
-                    <th class="col15mm">1</th>
+                    <th class="col40mm">1</th>
                     <th class="col35mm">2</th>
                     <th class="col35mm">3</th>
                     <th>4</th>
@@ -848,7 +860,7 @@
             </tbody>
         </table>
     </xsl:template>
-    <xsl:template match="NewBuilding | ExistBuilding | NewConstruction | ExistConstruction | SubBuilding | SubConstruction">
+    <xsl:template match="NewBuilding | ExistBuilding | NewConstruction | ExistConstruction">
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Описание местоположения объекта недвижимости'"/>
         </xsl:call-template>        
@@ -872,29 +884,29 @@
                         </td>
                     </tr>
                     <tr>
-                        <th rowspan="2" class="col15mm">Номер контура</th>
-                        <th rowspan="2" class="col20mm">Номера характерных точек контура</th>
-                        <th colspan="2" class="col40mm">Координаты, м</th>
-                        <th rowspan="2" class="col10mm">R,м</th>
-                        <th rowspan="2">Средняя квадратическая погрешность определения координат характерных точек контура (Mt),м</th>
-                        <th rowspan="2" class="col20mm">Тип контура</th>
-                        <th colspan="2" class="col15mm">Глубина, высота, м</th>
+                        <th rowspan="2" class="col40mm fontsize8">Номер контура</th>
+                        <th rowspan="2" class="col20mm fontsize8">Номера характерных точек контура</th>
+                        <th colspan="2" class="col40mm fontsize8">Координаты, м</th>
+                        <th rowspan="2" class="col7mm fontsize8">R,м</th>
+                        <th rowspan="2" class="fontsize8">Средняя квадратическая погрешность определения координат характерных точек контура (Mt),м</th>
+                        <th rowspan="2" class="col20mm fontsize8">Тип контура</th>
+                        <th colspan="2" class="col15mm fontsize8">Глубина, высота, м</th>
                     </tr>
                     <tr>
-                        <th class="col20mm">X</th>
-                        <th class="col20mm">Y</th>
-                        <th class="col7-5mm">H1</th>
-                        <th class="col7-5mm">H2</th>
+                        <th class="col20mm fontsize8">X</th>
+                        <th class="col20mm fontsize8">Y</th>
+                        <th class="col7-5mm fontsize8">H1</th>
+                        <th class="col7-5mm fontsize8">H2</th>
                     </tr>
                 </table>
             </caption>
             <thead>
                 <tr>
-                    <td class="col15mm">1</td>
+                    <td class="col40mm">1</td>
                     <td class="col20mm">2</td>
                     <td class="col20mm">3</td>
                     <td class="col20mm">4</td>
-                    <td class="col10mm">5</td>
+                    <td class="col7mm">5</td>
                     <td>6</td>
                     <td class="col20mm">7</td>
                     <td class="col7-5mm">8</td>
@@ -1010,7 +1022,7 @@
             <xsl:with-param name="node" select="."/>
         </xsl:call-template>
     </xsl:template>
-    <xsl:template name="Characteristics">        
+    <xsl:template name="Characteristics">
         <xsl:param name="node"/>
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Характеристики объекта недвижимости'"/>
@@ -1407,6 +1419,140 @@
             </tbody>
         </table>
     </xsl:template>
+    <xsl:template match="SubBuildings | SubConstructions | SubUncompleteds">
+        <xsl:call-template name="header1">
+            <xsl:with-param name="text1" select="'Сведения о части (частях) объекта недвижимости'"/>
+        </xsl:call-template>
+        <xsl:for-each select="NewSubBuilding | ExistSubBuilding | NewSubConstruction | ExistSubConstruction | NewSubUncompleted | ExistSubUncompleted">
+            <table class="tbl_section_sheet_data">
+                <caption>
+                    <table class="tbl_section_sheet_data">
+                        <tr>
+                            <th colspan="6" class="left">
+                                <xsl:value-of select="concat('Учетный номер или обозначение части: ',@Definition,@NumberRecord)"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="6" class="left">
+                                <b>1. Сведения о местоположении части объекта недвижимости</b>    
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="6" class="left gborder0">
+                                <b>1.1. Описание местоположения части объекта недвижимости в виде контура</b>    
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="left gborder0">
+                                Зона N
+                                <input type="text" style="text-decoration: underline;width: 25%;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2" class="col20mm">Номера характерных точек контура</th>
+                            <th colspan="2" class="col40mm">Координаты, м</th>
+                            <th rowspan="2">Средняя квадратическая погрешность определения координат характерных точек контура (Mt),м</th>
+                            <th rowspan="2" class="col30mm">Тип контура</th>
+                            <th rowspan="2" class="col40mm">Примечание</th>
+                        </tr>
+                        <tr>
+                            <th class="col20mm">X</th>
+                            <th class="col20mm">Y</th>
+                        </tr>
+                    </table>
+                </caption>
+                <thead>
+                    <tr>
+                        <td class="col20mm">1</td>
+                        <td class="col20mm">2</td>
+                        <td class="col20mm">3</td>
+                        <td>4</td>
+                        <td class="col30mm">5</td>
+                        <td class="col40mm">6</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <xsl:choose>
+                        <xsl:when test="EntitySpatial">
+                            <xsl:call-template name="SubEntitySpatial">
+                                <xsl:with-param name="entitySpatial" select="EntitySpatial"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <tr>
+                                <td><xsl:call-template name="procherk"/></td>
+                                <td><xsl:call-template name="procherk"/></td>
+                                <td><xsl:call-template name="procherk"/></td>
+                                <td><xsl:call-template name="procherk"/></td>
+                                <td><xsl:call-template name="procherk"/></td>
+                                <td><xsl:call-template name="procherk"/></td>
+                            </tr>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </tbody>
+            </table>
+            <table class="tbl_section_sheet_data">
+                <tbody>
+                    <tr>
+                        <th class="left gborder0">
+                            <b>1.2. Иное описание местоположения части объекта недвижимости</b>    
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="left gborder0">
+                            <xsl:value-of select="Description"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xsl:for-each>
+        <table class="tbl_section_sheet_data">
+            <caption>
+                <table class="tbl_section_sheet_data">
+                    <tr>
+                        <th colspan="4" class="left">
+                            <b>2. Общие сведения о части объекта недвижимости</b>    
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col5mm">№<br/>п/п</th>
+                        <th class="col40mm">Учетный номер и обозначение части</th>
+                        <th class="col40mm">Площадь (Р), / протяженность</th>
+                        <th>Характеристика части</th>
+                    </tr>                    
+                </table>
+            </caption>
+            <thead>
+                <tr>
+                    <td class="col5mm">1</td>
+                    <td class="col40mm">2</td>
+                    <td class="col40mm">3</td>
+                    <td>4</td>
+                </tr>
+            </thead>
+            <tbody>
+                <xsl:for-each select="NewSubBuilding | ExistSubBuilding | NewSubConstruction | ExistSubConstruction | NewSubUncompleted | ExistSubUncompleted">
+                    <tr>
+                        <td>
+                            <xsl:value-of select="position()"/>
+                        </td>
+                        <td>
+                            <xsl:value-of select="concat(@Definition,@NumberRecord)"/>
+                        </td>
+                        <td>
+                            <xsl:value-of select="Area"/>
+                        </td>
+                        <td class="left">
+                            <xsl:value-of select="Encumbrance"/>
+                        </td>
+                    </tr>
+                </xsl:for-each>
+            </tbody>
+        </table>
+    </xsl:template>
+    <xsl:template match="SubFlats">
+        
+    </xsl:template>
     <xsl:template match="Conclusion">
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Заключение кадастрового инженера'"/>
@@ -1585,7 +1731,7 @@
             </xsl:call-template>
             <svg width="1024" height="800"/>
             <xsl:variable name="yMin">
-                <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@Y | //NewConstruction/EntitySpatial/*//Ordinate/@Y | //ExistBuilding/EntitySpatial/*//Ordinate/@Y | //ExistConstruction/EntitySpatial/*//Ordinate/@Y">
+                <xsl:for-each select="//EntitySpatial/*//Ordinate/@Y">
                     <xsl:sort select="." data-type="number" order="ascending"/>
                     <xsl:if test="position() = 1">
                         <xsl:value-of select="."/>
@@ -1593,7 +1739,7 @@
                 </xsl:for-each>
             </xsl:variable>
             <xsl:variable name="xMin">
-                <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@X | //NewConstruction/EntitySpatial/*//Ordinate/@X | //ExistBuilding/EntitySpatial/*//Ordinate/@X | //ExistConstruction/EntitySpatial/*//Ordinate/@X">
+                <xsl:for-each select="//EntitySpatial/*//Ordinate/@X">
                     <xsl:sort select="." data-type="number" order="ascending"/>
                     <xsl:if test="position() = 1">
                         <xsl:value-of select="."/>
@@ -1601,7 +1747,7 @@
                 </xsl:for-each>
             </xsl:variable>
             <xsl:variable name="yMax">
-                <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@Y | //NewConstruction/EntitySpatial/*//Ordinate/@Y | //ExistBuilding/EntitySpatial/*//Ordinate/@Y | //ExistConstruction/EntitySpatial/*//Ordinate/@Y">
+                <xsl:for-each select="//EntitySpatial/*//Ordinate/@Y">
                     <xsl:sort select="." data-type="number" order="descending"/>
                     <xsl:if test="position() = 1">
                         <xsl:value-of select="."/>
@@ -1609,7 +1755,7 @@
                 </xsl:for-each>
             </xsl:variable>
             <xsl:variable name="xMax">
-                <xsl:for-each select="//NewBuilding/EntitySpatial/*//Ordinate/@X | //NewConstruction/EntitySpatial/*//Ordinate/@X | //ExistBuilding/EntitySpatial/*//Ordinate/@X | //ExistConstruction/EntitySpatial/*//Ordinate/@X">
+                <xsl:for-each select="//EntitySpatial/*//Ordinate/@X">
                     <xsl:sort select="." data-type="number" order="descending"/>
                     <xsl:if test="position() = 1">
                         <xsl:value-of select="."/>
@@ -1618,7 +1764,7 @@
             </xsl:variable>
             <script>
                 var json = {"type":"FeatureCollection","features":[
-                <xsl:for-each select="//NewBuilding/EntitySpatial/SpatialElement | //NewConstruction/EntitySpatial/SpatialElement | //ExistBuilding/EntitySpatial/SpatialElement | //ExistConstruction/EntitySpatial/SpatialElement">
+                <xsl:for-each select="//EntitySpatial/SpatialElement | //EntitySpatial/SpatialElement | //EntitySpatial/SpatialElement | //EntitySpatial/SpatialElement">
                     <xsl:choose>
                         <!-- Точка -->
                         <xsl:when test="SpelementUnit/@TypeUnit = 'Окружность'">
@@ -1700,32 +1846,40 @@
                 g.attr("transform", d3.event.transform);
                 }));
                 
+                var gPolygon = g.append("g")
+                    .attr("class", "polygons");
                 var polygon = json.features.filter(function(d) { return d.properties.ObjectType === "polygons";});
-                g.selectAll(".polygons")
+                gPolygon.selectAll(".polygons")
                 .data(polygon)
                 .enter().append("path")
                 .attr("class", "polygons")
                 .attr("d", path);
+                
+                var gPoint = g.append("g")
+                    .attr("class", "points");
                 var point = json.features.filter(function(d) { return d.properties.ObjectType === "points";});
-                g.selectAll(".points")
+                gPoint.selectAll(".points")
                 .data(point)
                 .enter().append("path")
                 .attr("class", "points")
                 .attr("d", path);           
+                
+                var gPline = g.append("g")
+                    .attr("class", "polylines");
                 var polyline0 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 0});
-                g.selectAll(".polylines")
+                gPline.selectAll(".polylines")
                 .data(polyline0)
                 .enter().append("path")
                 .attr("class", "polylines0")
                 .attr("d", path);
                 var polyline1 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 1});
-                g.selectAll(".polylines")
+                gPline.selectAll(".polylines")
                 .data(polyline1)
                 .enter().append("path")
                 .attr("class", "polylines1")
                 .attr("d", path);
                 var polyline2 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 2});
-                g.selectAll(".polylines")
+                gPline.selectAll(".polylines")
                 .data(polyline2)
                 .enter().append("path")
                 .attr("class", "polylines2")
@@ -1856,10 +2010,25 @@
                         <td>
                             <xsl:choose>
                                 <xsl:when test="contains(@Number,'.')">
-                                    <xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>
+                                    <!--<xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>-->
+                                    <xsl:choose>
+                                        <xsl:when test="substring-before(@Number,'.') = 0">
+                                            <xsl:call-template name="procherk"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="concat(substring-before(@Number,'.'),')')"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="@Number"/>
+                                    <xsl:choose>
+                                        <xsl:when test="@Number = 0">
+                                            <xsl:call-template name="procherk"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="@Number"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </td>
@@ -1908,11 +2077,26 @@
                     <tr>
                         <td>
                             <xsl:choose>
-                                <xsl:when test="contains(@Number,'.')">
-                                    <xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>
+                                <xsl:when test="contains(@Number,'.')">                                    
+                                    <!--<xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>-->
+                                    <xsl:choose>
+                                        <xsl:when test="substring-before(@Number,'.') = 0">
+                                            <xsl:call-template name="procherk"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="concat(substring-before(@Number,'.'),')')"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="@Number"/>
+                                    <xsl:choose>
+                                        <xsl:when test="@Number = 0">
+                                            <xsl:call-template name="procherk"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="@Number"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </td>
@@ -1958,10 +2142,25 @@
                         <td>
                             <xsl:choose>
                                 <xsl:when test="contains(@Number,'.')">
-                                    <xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>
+                                    <!--<xsl:value-of select="concat(substring-before(@Number,'.'),'/',substring-after(@Number,'/'))"/>-->
+                                    <xsl:choose>
+                                        <xsl:when test="substring-before(@Number,'.') = 0">
+                                            <xsl:call-template name="procherk"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="concat(substring-before(@Number,'.'),')')"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="@Number"/>
+                                    <xsl:choose>
+                                        <xsl:when test="@Number">
+                                            <xsl:call-template name="procherk"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="@Number"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </td>
@@ -2036,10 +2235,25 @@
                     <td>
                         <xsl:choose>
                             <xsl:when test="contains($num,'.')">
-                                <xsl:value-of select="concat(substring-before($num,'.'),'/',substring-after($num,'/'))"/>
+                               <!--<xsl:value-of select="concat(substring-before($num,'.'),'/',substring-after($num,'/'))"/>-->
+                                <xsl:choose>
+                                    <xsl:when test="substring-before($num,'.') = 0">
+                                        <xsl:call-template name="procherk"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat(substring-before($num,'.'),')')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="$num"/>
+                                <xsl:choose>
+                                    <xsl:when test="$num = 0">
+                                        <xsl:call-template name="procherk"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$num"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>                                
                             </xsl:otherwise>
                         </xsl:choose>
                     </td>
@@ -2071,6 +2285,59 @@
                     </td>
                     <td>
                         <xsl:call-template name="procherk"/>
+                    </td>
+                </tr>
+            </xsl:for-each>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template name="SubEntitySpatial">
+        <xsl:param name="entitySpatial"/>
+        <xsl:for-each select="$entitySpatial/SpatialElement">
+            <xsl:variable name="num" select="@Number"/>
+            <xsl:variable name="typeKontour">
+                <xsl:choose>
+                    <xsl:when test="@Underground = 0">
+                        <xsl:value-of select="'Наземный контур'"/>
+                    </xsl:when>
+                    <xsl:when test="@Underground = 1">
+                        <xsl:value-of select="'Подземный контур'"/>
+                    </xsl:when>
+                    <xsl:when test="@Underground = 2">
+                        <xsl:value-of select="'Надземный контур'"/>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:variable>
+            <tr>
+                <td class="left" colspan="6">
+                    <xsl:choose>
+                        <xsl:when test="contains(@Number,'.')">
+                            <xsl:value-of select="'Внутренний контур'"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="'Внешний контур'"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </td>
+            </tr>
+            <xsl:for-each select="SpelementUnit">
+                <tr>
+                    <td>
+                        <xsl:value-of select="Ordinate/@NumGeopoint"/>
+                    </td>
+                    <td>
+                        <xsl:value-of select="Ordinate/@X"/>
+                    </td>
+                    <td>
+                        <xsl:value-of select="Ordinate/@Y"/>
+                    </td>
+                    <td>
+                        <xsl:value-of select="Ordinate/@DeltaGeopoint"/>
+                    </td>
+                    <td>
+                        <xsl:value-of select="$typeKontour"/>
+                    </td>
+                    <td>
+                        <xsl:value-of select="@Note"/>
                     </td>
                 </tr>
             </xsl:for-each>
