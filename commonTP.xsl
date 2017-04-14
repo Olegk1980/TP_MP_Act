@@ -120,29 +120,40 @@
                             .notprint{display:none}
                         }
                     </style>
-                <style type="text/css">                    
+                <style type="text/css">
+                    svg{
+                        background-color: black;
+                    }
                     rect{
                         fill:none;
-                        pointer-events:all;                    
+                        pointer-events:all;
                     }
-                    .points{
+                    .points0{
                         fill:green;
                         stroke:green;
                     }
+                    .points1{
+                    fill:lightgreen;
+                    stroke:lightgreen;
+                    }
+                    .points2{
+                    fill:darkgreen;
+                    stroke:darkgreen;
+                    }
                     .polylines0{
                         fill:none;
-                        stroke:black;
+                        stroke:white;
                         stroke-width:0.5;
                     }
                     .polylines1{
                     fill:none;
-                    stroke:black;
+                    stroke:white;
                     stroke-width:0.5;
                     stroke-dasharray: 5,1,0.5,1,0.5,1;
                     }
                     .polylines2{
                     fill:none;
-                    stroke:black;
+                    stroke:white;
                     stroke-width:0.5;
                     stroke-dasharray: 5,1,0.5,1;
                     }
@@ -150,11 +161,23 @@
                     -webkit-filter: invert(100%);
                     filter: invert(100%);
                     }
-                    .polygons{
+                    .polygons0{
                         fill:gray;
                         stroke:none;
                         stroke-width:0.1;
                         mix-blend-mode: difference;
+                    }
+                    .polygons1{
+                    fill:lightgray;
+                    stroke:none;
+                    stroke-width:0.1;
+                    mix-blend-mode: difference;
+                    }
+                    .polygons2{
+                    fill:darkgray;
+                    stroke:none;
+                    stroke-width:0.1;
+                    mix-blend-mode: difference;
                     }                    
                 </style>
                 <style type="text/css">
@@ -278,6 +301,17 @@
             </xsl:when>
             <xsl:when test="$subConstructions">
                 <xsl:apply-templates select="$subConstructions"/>
+            </xsl:when>
+            <xsl:when test="$newUncompleteds">
+                <xsl:for-each select="$newUncompleteds/NewUncompleted">
+                    <xsl:apply-templates select="."/>
+                </xsl:for-each>                
+            </xsl:when>
+            <xsl:when test="$existUncompleted">
+                <xsl:apply-templates select="$existUncompleted"/>
+            </xsl:when>
+            <xsl:when test="$subUncompleteds">
+                <xsl:apply-templates select="$subUncompleteds"/>
             </xsl:when>
             <xsl:when test="$newFlats">
                 <xsl:for-each select="$newFlats/NewFlat">
@@ -860,7 +894,7 @@
             </tbody>
         </table>
     </xsl:template>
-    <xsl:template match="NewBuilding | ExistBuilding | NewConstruction | ExistConstruction">
+    <xsl:template match="NewBuilding | ExistBuilding | NewConstruction | ExistConstruction | NewUncompleted | ExistUncompleted">
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Описание местоположения объекта недвижимости'"/>
         </xsl:call-template>        
@@ -1729,7 +1763,7 @@
             <xsl:call-template name="header1">
                 <xsl:with-param name="text1" select="'Сгенерированная карта'"/>
             </xsl:call-template>
-            <svg width="1024" height="800"/>
+            <svg/>
             <xsl:variable name="yMin">
                 <xsl:for-each select="//EntitySpatial/*//Ordinate/@Y">
                     <xsl:sort select="." data-type="number" order="ascending"/>
@@ -1769,7 +1803,7 @@
                         <!-- Точка -->
                         <xsl:when test="SpelementUnit/@TypeUnit = 'Окружность'">
                             <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;,&quot;Underground&quot;:',@Underground,'},')"/>
+                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
                             <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
                             <xsl:value-of select="concat('[',SpelementUnit/Ordinate/@Y,',',SpelementUnit/Ordinate/@X,']')"/>
                             <xsl:value-of select="',&quot;radius&quot;:'"/> 
@@ -1777,9 +1811,10 @@
                             <xsl:value-of select="'}}'"/>           
                         </xsl:when>
                         <!-- Полилиния -->
-                        <xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y | SpelementUnit[1]/Ordinate/@NumGeopoint = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y | SpelementUnit[last()]/Ordinate/@NumGeopoint)">
+                        <!--<xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y | SpelementUnit[1]/Ordinate/@NumGeopoint = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y | SpelementUnit[last()]/Ordinate/@NumGeopoint)">-->
+                        <xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y)">
                             <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polylines&quot;,&quot;Underground&quot;:',@Underground,'},')"/>
+                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polylines&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
                             <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;LineString&quot;,&quot;coordinates&quot;:['"/>
                             <xsl:for-each select="SpelementUnit">                                            
                                 <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
@@ -1792,7 +1827,7 @@
                         <!-- Полигон -->
                         <xsl:otherwise>
                             <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polygons&quot;,&quot;Underground&quot;:',@Underground,'},')"/>
+                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polygons&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
                             <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[['"/>
                             <xsl:for-each select="SpelementUnit">                                            
                                 <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
@@ -1808,45 +1843,56 @@
                     </xsl:if>
                 </xsl:for-each>
                 <xsl:text>]};</xsl:text>                            
+                                
+                <xsl:text></xsl:text>                
+                var width = document.documentElement.clientWidth - 100;
+                var height = 800;                
+                <xsl:value-of select="concat('var yMin = ', $yMin,';')"/>
+                <xsl:value-of select="concat('var yMax = ', $yMax,';')"/>
+                <xsl:value-of select="concat('var xMin = ', $xMin,';')"/>
+                <xsl:value-of select="concat('var xMax = ', $xMax,';')"/>
+                var yAvg = (((yMax - yMin) / 2)+yMin),
+                    xAvg = (((xMax - xMin) / 2)+xMin);
+                var scale = (width/(yAvg-yMin))/2 > (height/(xAvg-xMin))/2 ? (height/(xAvg-xMin))/2 : (width/(yAvg-yMin))/2;
+                var scaleMx = Math.floor(width/(yMax-yMin));
+                scaleMx = scaleMx > 1 ? scaleMx : 1;
                 
-                <xsl:value-of select="concat('var yAvg = ', $yMin + (($yMax - $yMin) div 2),';')"/>
-                <xsl:value-of select="concat('var xAvg = ', $xMax + (($xMin - $xMax) div 2),';')"/>
-                <xsl:choose>
-                    <xsl:when test="($yMax - $yMin) &gt; 1024">
-                        <xsl:value-of select="concat('var scaleMx = ', 1,';')"/>
-                        <xsl:value-of select="concat('var scaleEx = ', ($xMax - $xMin) div 800,';')"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="concat('var scaleEx = ', 2,';')"/>
-                        <xsl:value-of select="concat('var scaleMx = ', floor(1024 div ($yMax - $yMin)),';')"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-                
-                var svg = d3.select("svg");
-                var width = +svg.attr("width");
-                var height = +svg.attr("height");
+                var svg = d3.select("svg")
+                .attr("width",width)
+                .attr("height",height);
+                <!--var width = +svg.attr("width");
+                var height = +svg.attr("height");-->
                 
                 var path = d3.geoPath()
                 .projection(matrix(scaleMx, 0, 0, -scaleMx, (width/2)-(yAvg*scaleMx), (height/2)+(xAvg*scaleMx)));
                 function matrix(a, b, c, d, tx, ty) {
-                return d3.geoTransform({
-                point: function(x, y) {
-                this.stream.point(a * x + b * y + tx, c * x + d * y + ty);
-                }
-                });
-                }    
+                  return d3.geoTransform({
+                    point: function(x, y) {
+                      this.stream.point(a * x + b * y + tx, c * x + d * y + ty);
+                    }
+                  });
+                }  
                 
-                var g = svg.append("g");                            
+                var zoom = d3.zoom()
+                             .scaleExtent([1 / 10, 20])
+                             .on("zoom", function () {
+                                           g.attr("transform", 
+                                                  "translate(" + d3.event.transform.x + 
+                                                  "," + d3.event.transform.y + 
+                                                  ")scale(" + d3.event.transform.k + ")"
+                                                  );
+                                         }
+                                );
+                
+                var g = svg.append("g");
+
                 svg.append("rect")
                 .attr("width", width)
                 .attr("height", height)
-                .call(d3.zoom()
-                .scaleExtent([1 / scaleEx, 5])
-                .on("zoom", function () {
-                g.attr("transform", d3.event.transform);
-                }));
-                
-                var gPolygon = g.append("g")
+                .call(zoom)
+                .call(zoom.scaleTo, scale/scaleMx);
+                                
+                <!--var gPolygon = g.append("g")
                     .attr("class", "polygons");
                 var polygon = json.features.filter(function(d) { return d.properties.ObjectType === "polygons";});
                 gPolygon.selectAll(".polygons")
@@ -1865,25 +1911,20 @@
                 .attr("d", path);           
                 
                 var gPline = g.append("g")
-                    .attr("class", "polylines");
-                var polyline0 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 0});
+                .attr("class", "polylines");
+                var polyline = json.features.filter(function(d) {return d.properties.ObjectType === "polylines"});
                 gPline.selectAll(".polylines")
-                .data(polyline0)
+                .data(polyline)
                 .enter().append("path")
-                .attr("class", "polylines0")
+                .attr("class", function(d) {return "polylines" + d.properties.Underground;})
+                .attr("d", path);-->                
+                g.selectAll("path")
+                .data(json.features)
+                .enter().append("path")
+                .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
+                .attr("numObj", function(d) {return d.properties.NumbCont;})
                 .attr("d", path);
-                var polyline1 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 1});
-                gPline.selectAll(".polylines")
-                .data(polyline1)
-                .enter().append("path")
-                .attr("class", "polylines1")
-                .attr("d", path);
-                var polyline2 = json.features.filter(function(d) { return d.properties.ObjectType === "polylines" &amp;&amp; d.properties.Underground == 2});
-                gPline.selectAll(".polylines")
-                .data(polyline2)
-                .enter().append("path")
-                .attr("class", "polylines2")
-                .attr("d", path);                                
+                
             </script>
         </div>
     </xsl:template>
@@ -2016,7 +2057,7 @@
                                             <xsl:call-template name="procherk"/>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:value-of select="concat(substring-before(@Number,'.'),')')"/>
+                                            <xsl:value-of select="substring-before(@Number,'.')"/>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
@@ -2084,7 +2125,7 @@
                                             <xsl:call-template name="procherk"/>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:value-of select="concat(substring-before(@Number,'.'),')')"/>
+                                            <xsl:value-of select="substring-before(@Number,'.')"/>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
@@ -2148,7 +2189,7 @@
                                             <xsl:call-template name="procherk"/>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:value-of select="concat(substring-before(@Number,'.'),')')"/>
+                                            <xsl:value-of select="substring-before(@Number,'.')"/>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:when>
@@ -2241,7 +2282,7 @@
                                         <xsl:call-template name="procherk"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of select="concat(substring-before($num,'.'),')')"/>
+                                        <xsl:value-of select="substring-before($num,'.')"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
