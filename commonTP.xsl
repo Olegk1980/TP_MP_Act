@@ -1226,7 +1226,7 @@
                     <td class="left">Адрес объекта недвижимости</td>
                     <td class="left">
                         <xsl:choose>
-                            <xsl:when test="$node/Address">
+                            <xsl:when test="not($node/Address/Note)">
                                 <xsl:apply-templates select="$node/Address"/>
                             </xsl:when>
                             <xsl:otherwise><xsl:call-template name="procherk"/></xsl:otherwise>
@@ -1242,7 +1242,12 @@
                 <tr>
                     <td class="left">Местоположение объекта недвижимости</td>
                     <td class="left">
-                        <xsl:call-template name="procherk"/>
+                        <xsl:choose>
+                            <xsl:when test="$node/Address/Note">
+                                <xsl:apply-templates select="$node/Address"/>
+                            </xsl:when>
+                            <xsl:otherwise><xsl:call-template name="procherk"/></xsl:otherwise>
+                        </xsl:choose>
                     </td>
                 </tr>
                 <tr>
@@ -1891,39 +1896,41 @@
                 .attr("height", height)
                 .call(zoom)
                 .call(zoom.scaleTo, scale/scaleMx);
-                                
-                <!--var gPolygon = g.append("g")
-                    .attr("class", "polygons");
+                
+<!--   Площадные объекты       -->
                 var polygon = json.features.filter(function(d) { return d.properties.ObjectType === "polygons";});
+                var gPolygon = g.append("g").attr("class", "polygons");                
                 gPolygon.selectAll(".polygons")
-                .data(polygon)
-                .enter().append("path")
-                .attr("class", "polygons")
-                .attr("d", path);
-                
-                var gPoint = g.append("g")
-                    .attr("class", "points");
+                    .data(polygon)
+                    .enter().append("path")
+                    .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
+                    .attr("numObj", function(d) {return d.properties.NumbCont;})
+                    .attr("d", path);
+<!--   Точечные объекты       -->                
                 var point = json.features.filter(function(d) { return d.properties.ObjectType === "points";});
+                var gPoint = g.append("g").attr("class", "points");                
                 gPoint.selectAll(".points")
-                .data(point)
-                .enter().append("path")
-                .attr("class", "points")
-                .attr("d", path);           
-                
-                var gPline = g.append("g")
-                .attr("class", "polylines");
+                    .data(point)
+                    .enter().append("path")
+                    .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
+                    .attr("numObj", function(d) {return d.properties.NumbCont;})
+                    .attr("d", path);           
+<!--   Линейные объекты       -->
                 var polyline = json.features.filter(function(d) {return d.properties.ObjectType === "polylines"});
+                var gPline = g.append("g").attr("class", "polylines");                
                 gPline.selectAll(".polylines")
-                .data(polyline)
-                .enter().append("path")
-                .attr("class", function(d) {return "polylines" + d.properties.Underground;})
-                .attr("d", path);-->                
-                g.selectAll("path")
+                    .data(polyline)
+                    .enter().append("path")
+                    .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
+                    .attr("numObj", function(d) {return d.properties.NumbCont;})
+                    .attr("d", path);
+                
+                <!--g.selectAll("path")
                 .data(json.features)
                 .enter().append("path")
                 .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
                 .attr("numObj", function(d) {return d.properties.NumbCont;})
-                .attr("d", path);
+                .attr("d", path);-->
                 
             </script>
         </div>
@@ -2271,8 +2278,21 @@
                     </xsl:choose>
                 </td>
             </tr>
-            <xsl:for-each select="SpelementUnit">
-                <tr>
+            <xsl:for-each select="SpelementUnit">                
+                <xsl:choose>
+                    <xsl:when test="(count(parent::SpatialElement/SpelementUnit) = 1 and @TypeUnit = 'Точка')">
+                        <xsl:text disable-output-escaping="yes">&lt;tr style="background-color: red;"&gt;</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="not(starts-with(Ordinate/@X, 5)) or string-length(ceiling(Ordinate/@X)) != 6">
+                        <xsl:text disable-output-escaping="yes">&lt;tr style="background-color: rebeccapurple;"&gt;</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="not(starts-with(Ordinate/@Y, 13) or starts-with(Ordinate/@Y, 23)) or string-length(ceiling(Ordinate/@Y)) != 7">
+                        <xsl:text disable-output-escaping="yes">&lt;tr style="background-color: rebeccapurple;"&gt;</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text disable-output-escaping="yes">&lt;tr&gt;</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
                     <td>
                         <xsl:choose>
                             <xsl:when test="contains($num,'.')">
@@ -2327,7 +2347,7 @@
                     <td>
                         <xsl:call-template name="procherk"/>
                     </td>
-                </tr>
+                <xsl:text disable-output-escaping="yes">&lt;/tr&gt;</xsl:text>
             </xsl:for-each>
         </xsl:for-each>
     </xsl:template>
