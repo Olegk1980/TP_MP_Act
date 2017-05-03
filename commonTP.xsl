@@ -121,67 +121,70 @@
                         }
                     </style>
                 <style type="text/css">
-                    svg{
+                    svg {
                         background-color: black;
+                        margin-top: 2px;
                     }
-                    rect{
+                    rect {
                         fill:none;
                         pointer-events:all;
                     }
-                    .points0{
+                    .points0 {
                         fill:green;
                         stroke:green;
                     }
-                    .points1{
-                    fill:lightgreen;
-                    stroke:lightgreen;
+                    .points1 {
+                        fill:lightgreen;
+                        stroke:lightgreen;
                     }
-                    .points2{
-                    fill:darkgreen;
-                    stroke:darkgreen;
+                    .points2 {
+                        fill:darkgreen;
+                        stroke:darkgreen;
                     }
-                    .polylines0{
+                    .polylines0 {
                         fill:none;
                         stroke:white;
                         stroke-width:0.5;
                     }
-                    .polylines1{
-                    fill:none;
-                    stroke:white;
-                    stroke-width:0.5;
-                    stroke-dasharray: 5,1,0.5,1,0.5,1;
+                    .polylines1 {
+                        fill:none;
+                        stroke:white;
+                        stroke-width:0.5;
+                        stroke-dasharray: 5,1,0.5,1,0.5,1;
                     }
-                    .polylines2{
-                    fill:none;
-                    stroke:white;
-                    stroke-width:0.5;
-                    stroke-dasharray: 5,1,0.5,1;
+                    .polylines2 {
+                        fill:none;
+                        stroke:white;
+                        stroke-width:0.5;
+                        stroke-dasharray: 5,1,0.5,1;
                     }
-                    g.polygons{
-                    -webkit-filter: invert(100%);
-                    filter: invert(100%);
+                    <!--
+                    g.polygons {
+                        -webkit-filter: invert(100%);
+                        filter: invert(100%);
                     }
-                    .polygons0{
+                    -->
+                    .polygons0 {
                         fill:gray;
                         stroke:none;
                         stroke-width:0.1;
                         mix-blend-mode: difference;
                     }
-                    .polygons1{
-                    fill:lightgray;
-                    stroke:none;
-                    stroke-width:0.1;
-                    mix-blend-mode: difference;
+                    .polygons1 {
+                        fill:lightgray;
+                        stroke:none;
+                        stroke-width:0.1;
+                        mix-blend-mode: difference;
                     }
-                    .polygons2{
-                    fill:darkgray;
-                    stroke:none;
-                    stroke-width:0.1;
-                    mix-blend-mode: difference;
+                    .polygons2 {
+                        fill:darkgray;
+                        stroke:none;
+                        stroke-width:0.1;
+                        mix-blend-mode: difference;
                     }                    
                 </style>
                 <style type="text/css">
-                    input{
+                    .pole{
                         width: 95%;
                         margin: 0;
                         border: 0px solid #C0C0C0;
@@ -191,14 +194,18 @@
                         font-family: times new roman, arial, sans-serif;
                         font-weight: 400;
                         line-height: 10pt;                        
-                    }
-                    #date_center {
-                    text-align: center;
-                    text-decoration: underline;
-                    }
+                        }
+                    .zone {
+                        text-decoration: underline;
+                        width: 25%;
+                        }
+                    .date_center {
+                        text-align: center;
+                        text-decoration: underline;
+                        }
                     a.plan{
                         text-decoration: none;
-                    }
+                        }
                 </style>
             </head>
             <body>
@@ -209,13 +216,17 @@
                                 <table class="tbl_container">                                    
                                     <tbody>
                                         <tr>
-                                            <td style="font-size: 7pt;">
-                                                <xsl:value-of select="//comment()"/>
-                                            </td>                            
-                                        </tr>
-                                        <tr>
                                             <th>
                                                 <div>
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="font-size: 7pt;text-align: left;">
+                                                                    <xsl:value-of select="//comment()"/>
+                                                                </td> 
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                     <xsl:choose>
                                                         <xsl:when test="descendant::Building">
                                                             <xsl:call-template name="header1">
@@ -431,7 +442,7 @@
                     <xsl:text>Страховой номер индивидуального лицевого счета </xsl:text>
                 </td>
                 <td class="left vborder0">
-                    <input type="text"/>
+                    <xsl:call-template name="inputText"/>
                 </td>
             </tr>
             <tr>
@@ -439,7 +450,7 @@
                     <xsl:text>N регистрации в государственном реестре лиц, осуществляющих кадастровую деятельность</xsl:text>
                 </td>
                 <td class="left vborder0">
-                    <input type="text"/>
+                    <xsl:call-template name="inputText"/>
                 </td>
             </tr>
             <tr>
@@ -468,7 +479,7 @@
                     <xsl:text>Наименование саморегулируемой организации кадастровых инженеров, членом которой является кадастровый инженер</xsl:text>
                 </td>
                 <td class="left vborder0">
-                    <input type="text"/>
+                    <xsl:call-template name="inputText"/>
                 </td>
             </tr>
             <tr>
@@ -493,7 +504,9 @@
                     <xsl:text>N и дата заключения договора на выполнение кадастровых работ</xsl:text>
                 </td>
                 <td class="left vborder0">
-                    <input type="text"/>
+                    <xsl:call-template name="inputText">
+                        <xsl:with-param name="textarea" select="'true'"/>
+                    </xsl:call-template>
                 </td>
             </tr>
             <tr>
@@ -501,9 +514,9 @@
                     <xsl:text>Дата подготовки технического плана (число, месяц, год)</xsl:text>                    
                 </td>
                 <td class="left vborder0">
-                    <xsl:value-of select="substring(@DateCadastral, 9, 2)"
-                    />.<xsl:value-of select="substring(@DateCadastral, 6, 2)"
-                    />.<xsl:value-of select="substring(@DateCadastral, 1, 4)"/> 
+                    <xsl:value-of select="substring(@DateCadastral, 9, 2)"/>.
+                    <xsl:value-of select="substring(@DateCadastral, 6, 2)"/>.
+                    <xsl:value-of select="substring(@DateCadastral, 1, 4)"/> 
                 </td>
             </tr>
         </table>
@@ -574,7 +587,11 @@
                         <th rowspan="2">Название пункта и тип знака геодезической сети</th>
                         <th rowspan="2" class="col25mm">Класс геодезической сети</th>
                         <th colspan="2" class="col40mm">Координаты, м</th>
-                        <th colspan="3" class="col60mm">Сведения о состоянии на <input type="text" id="date_center"/></th>
+                        <th colspan="3" class="col60mm">Сведения о состоянии на 
+                            <xsl:call-template name="inputText">
+                                <xsl:with-param name="date_center" select="'true'"/>
+                            </xsl:call-template>
+                        </th>
                     </tr>
                     <tr>
                         <th class="col20mm">X</th>
@@ -914,7 +931,9 @@
                     <tr>
                         <td colspan="9" class="left gborder0">
                             Зона N
-                            <input type="text" style="text-decoration: underline;width: 25%;"/>
+                            <xsl:call-template name="inputText">
+                                <xsl:with-param name="zone" select="'true'"/>
+                            </xsl:call-template>
                         </td>
                     </tr>
                     <tr>
@@ -1000,7 +1019,9 @@
                     <tr>
                         <td colspan="9" class="left gborder0">
                             Зона N
-                            <input type="text" style="text-decoration: underline;width: 25%;"/>                      
+                            <xsl:call-template name="inputText">
+                                <xsl:with-param name="zone" select="'true'"/>
+                            </xsl:call-template>                      
                         </td>
                     </tr>
                     <tr>
@@ -1484,7 +1505,9 @@
                         <tr>
                             <td colspan="6" class="left gborder0">
                                 Зона N
-                                <input type="text" style="text-decoration: underline;width: 25%;"/>
+                                <xsl:call-template name="inputText">
+                                    <xsl:with-param name="zone" select="'true'"/>
+                                </xsl:call-template>
                             </td>
                         </tr>
                         <tr>
@@ -2283,10 +2306,10 @@
                     <xsl:when test="(count(parent::SpatialElement/SpelementUnit) = 1 and @TypeUnit = 'Точка')">
                         <xsl:text disable-output-escaping="yes">&lt;tr style="background-color: red;"&gt;</xsl:text>
                     </xsl:when>
-                    <xsl:when test="not(starts-with(Ordinate/@X, 5)) or string-length(ceiling(Ordinate/@X)) != 6">
+                    <xsl:when test="string-length(ceiling(Ordinate/@X)) != 6">
                         <xsl:text disable-output-escaping="yes">&lt;tr style="background-color: rebeccapurple;"&gt;</xsl:text>
                     </xsl:when>
-                    <xsl:when test="not(starts-with(Ordinate/@Y, 13) or starts-with(Ordinate/@Y, 23)) or string-length(ceiling(Ordinate/@Y)) != 7">
+                    <xsl:when test="string-length(ceiling(Ordinate/@Y)) != 7">
                         <xsl:text disable-output-escaping="yes">&lt;tr style="background-color: rebeccapurple;"&gt;</xsl:text>
                     </xsl:when>
                     <xsl:otherwise>
@@ -2558,6 +2581,25 @@
                 <xsl:value-of select="concat($familyName, ' ', $firstName,' ')"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    <xsl:template name="inputText">        
+        <xsl:param name="date_center"/>
+        <xsl:param name="zone"/>
+        <xsl:param name="textarea"/>
+        <xsl:choose>
+            <xsl:when test="$date_center = 'true'">
+                <input class="pole date_center" type="text"/>
+            </xsl:when>
+            <xsl:when test="$zone = 'true'">
+                <input class="pole zone" type="text"/>
+            </xsl:when>
+            <xsl:when test="$textarea">
+                <textarea class="pole"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <input class="pole" type="text"/>
+            </xsl:otherwise>
+        </xsl:choose>        
     </xsl:template>
     <xsl:template name="procherk">
         <div class="procherk">
