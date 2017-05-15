@@ -138,8 +138,8 @@
                         stroke:lightgreen;
                     }
                     .points2 {
-                        fill:darkgreen;
-                        stroke:darkgreen;
+                        fill:greenyellow;
+                        stroke:greenyellow;
                     }
                     .polylines0 {
                         fill:none;
@@ -331,6 +331,9 @@
             </xsl:when>
             <xsl:when test="$existFlat">
                 <xsl:apply-templates select="$existFlat"/>
+            </xsl:when>
+            <xsl:when test="$subFlats">
+                <xsl:apply-templates select="$subFlats"/>
             </xsl:when>
         </xsl:choose>
         <xsl:apply-templates select="Conclusion"/>
@@ -1071,11 +1074,17 @@
         <xsl:call-template name="Characteristics">
             <xsl:with-param name="node" select="."/>
         </xsl:call-template>
+        <xsl:if test="./SubBuildings | ./SubConstructions | ./SubUncompleted">
+            <xsl:apply-templates select="./SubBuildings | ./SubConstructions | ./SubUncompleted"/>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="NewFlat | ExistFlat">
         <xsl:call-template name="Characteristics">
             <xsl:with-param name="node" select="."/>
         </xsl:call-template>
+        <xsl:if test="./SubFlats">
+            <xsl:apply-templates select="./SubFlats"/>
+        </xsl:if>
     </xsl:template>
     <xsl:template name="Characteristics">
         <xsl:param name="node"/>
@@ -1479,17 +1488,17 @@
             </tbody>
         </table>
     </xsl:template>
-    <xsl:template match="SubBuildings | SubConstructions | SubUncompleteds">
+    <xsl:template match="SubBuildings | SubConstructions | SubUncompleteds | SubUncompleted | SubFlats">
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Сведения о части (частях) объекта недвижимости'"/>
         </xsl:call-template>
-        <xsl:for-each select="NewSubBuilding | ExistSubBuilding | NewSubConstruction | ExistSubConstruction | NewSubUncompleted | ExistSubUncompleted">
+        <xsl:for-each select="NewSubBuilding | ExistSubBuilding | NewSubConstruction | ExistSubConstruction | NewSubUncompleted | ExistSubUncompleted | NewSubFlat | ExistSubFlat">
             <table class="tbl_section_sheet_data">
                 <caption>
                     <table class="tbl_section_sheet_data">
                         <tr>
                             <th colspan="6" class="left">
-                                <xsl:value-of select="concat('Учетный номер или обозначение части: ',@Definition,@NumberRecord)"/>
+                                <xsl:value-of select="concat('Учетный номер или обозначение части: ', @Definition,preceding-sibling::CadastralNumber/text())"/>
                             </th>
                         </tr>
                         <tr>
@@ -1593,13 +1602,13 @@
                 </tr>
             </thead>
             <tbody>
-                <xsl:for-each select="NewSubBuilding | ExistSubBuilding | NewSubConstruction | ExistSubConstruction | NewSubUncompleted | ExistSubUncompleted">
+                <xsl:for-each select="NewSubBuilding | ExistSubBuilding | NewSubConstruction | ExistSubConstruction | NewSubUncompleted | ExistSubUncompleted | NewSubFlat | ExistSubFlat">
                     <tr>
                         <td>
                             <xsl:value-of select="position()"/>
                         </td>
                         <td>
-                            <xsl:value-of select="concat(@Definition,@NumberRecord)"/>
+                            <xsl:value-of select="concat(@Definition,preceding-sibling::CadastralNumber/text())"/>
                         </td>
                         <td>
                             <xsl:value-of select="Area"/>
@@ -1611,9 +1620,6 @@
                 </xsl:for-each>
             </tbody>
         </table>
-    </xsl:template>
-    <xsl:template match="SubFlats">
-        
     </xsl:template>
     <xsl:template match="Conclusion">
         <xsl:call-template name="header1">
