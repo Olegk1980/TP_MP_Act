@@ -181,10 +181,14 @@
                         stroke:none;
                         stroke-width:0.1;
                         mix-blend-mode: difference;
-                    }                    
+                    }
+                    .pointsE {
+                        fill:red;
+                        stroke:red;
+                    }
                 </style>
                 <style type="text/css">
-                    .pole{
+                    .pole {
                         width: 95%;
                         margin: 0;
                         border: 0px solid #C0C0C0;
@@ -203,7 +207,7 @@
                         text-align: center;
                         text-decoration: underline;
                         }
-                    a.plan{
+                    a.plan {
                         text-decoration: none;
                         }
                 </style>
@@ -571,17 +575,16 @@
                     <tr>
                         <th colspan="8" class="left">
                             <b>2. Сведения о геодезической основе, использованной при подготовке технического плана
-                                <div>
-                                    <xsl:text>Система координат </xsl:text>
-                                    <ins>
-                                        <xsl:for-each select="preceding-sibling::CoordSystems/CoordSystem">
-                                            <xsl:value-of select="@Name"/>
-                                            <xsl:if test="position() != last()">
-                                                <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                        </xsl:for-each>
-                                    </ins>
-                                </div>
+                                <br />
+                                <xsl:text>Система координат </xsl:text>
+                                <ins>
+                                    <xsl:for-each select="preceding-sibling::CoordSystems/CoordSystem">
+                                        <xsl:value-of select="@Name"/>
+                                        <xsl:if test="position() != last()">
+                                            <xsl:text>, </xsl:text>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                </ins>                                
                             </b>
                         </th>
                     </tr>
@@ -905,10 +908,12 @@
                         <xsl:apply-templates select="TochnGeopointsSubBuilding | TochnGeopointsSubConstruction | TochnGeopointsSubUncompleted"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <td><xsl:call-template name="procherk"/></td>
-                        <td><xsl:call-template name="procherk"/></td>
-                        <td><xsl:call-template name="procherk"/></td>
-                        <td><xsl:call-template name="procherk"/></td>
+                        <tr>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                            <td><xsl:call-template name="procherk"/></td>
+                        </tr>
                     </xsl:otherwise>                
                 </xsl:choose>
             </tbody>
@@ -1834,42 +1839,71 @@
                 var json = {"type":"FeatureCollection","features":[
                 <xsl:for-each select="//EntitySpatial/SpatialElement | //EntitySpatial/SpatialElement | //EntitySpatial/SpatialElement | //EntitySpatial/SpatialElement">
                     <xsl:choose>
-                        <!-- Точка -->
-                        <xsl:when test="SpelementUnit/@TypeUnit = 'Окружность'">
-                            <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
-                            <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
-                            <xsl:value-of select="concat('[',SpelementUnit/Ordinate/@Y,',',SpelementUnit/Ordinate/@X,']')"/>
-                            <xsl:value-of select="',&quot;radius&quot;:'"/> 
-                            <xsl:value-of select="SpelementUnit/R"/>
-                            <xsl:value-of select="'}}'"/>           
+                        <xsl:when test="count(SpelementUnit) = 1">
+                            <xsl:choose>
+                                <!-- Точка -->
+                                <xsl:when test="SpelementUnit/@TypeUnit = 'Окружность'">
+                                    <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                                    <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
+                                    <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
+                                    <xsl:value-of select="concat('[',SpelementUnit/Ordinate/@Y,',',SpelementUnit/Ordinate/@X,']')"/>
+                                    <xsl:value-of select="',&quot;radius&quot;:'"/> 
+                                    <xsl:value-of select="SpelementUnit/R"/>
+                                    <xsl:value-of select="'}}'"/>           
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                                    <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;,&quot;Underground&quot;:&quot;E&quot;,&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
+                                    <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
+                                    <xsl:value-of select="concat('[',SpelementUnit/Ordinate/@Y,',',SpelementUnit/Ordinate/@X,']')"/>
+                                    <xsl:value-of select="',&quot;radius&quot;:&quot;0.5&quot;'"/>
+                                    <xsl:value-of select="'}}'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:when>
-                        <!-- Полилиния -->
-                        <!--<xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y | SpelementUnit[1]/Ordinate/@NumGeopoint = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y | SpelementUnit[last()]/Ordinate/@NumGeopoint)">-->
-                        <xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y)">
-                            <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polylines&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
-                            <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;LineString&quot;,&quot;coordinates&quot;:['"/>
-                            <xsl:for-each select="SpelementUnit">                                            
-                                <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
-                                <xsl:if test="not(position() = last())">
-                                    <xsl:value-of select="','"/>
-                                </xsl:if>
-                            </xsl:for-each>
-                            <xsl:value-of select="']}}'"/>                                        
-                        </xsl:when>
-                        <!-- Полигон -->
                         <xsl:otherwise>
-                            <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
-                            <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polygons&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
-                            <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[['"/>
-                            <xsl:for-each select="SpelementUnit">                                            
-                                <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
-                                <xsl:if test="not(position() = last())">
-                                    <xsl:value-of select="','"/>
-                                </xsl:if>
-                            </xsl:for-each>                                            
-                            <xsl:value-of select="']]}}'"/> 
+                            <xsl:choose>
+                                <!-- Полилиния -->
+                                <!--<xsl:when test="not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y | SpelementUnit[1]/Ordinate/@NumGeopoint = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y | SpelementUnit[last()]/Ordinate/@NumGeopoint)">-->
+                                <xsl:when test="(not(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y)) and (SpelementUnit[1]/@TypeUnit = 'Точка')">
+                                    <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                                    <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polylines&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
+                                    <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;LineString&quot;,&quot;coordinates&quot;:['"/>
+                                    <xsl:for-each select="SpelementUnit">                                            
+                                        <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
+                                        <xsl:if test="not(position() = last())">
+                                            <xsl:value-of select="','"/>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                    <xsl:value-of select="']}}'"/>                                        
+                                </xsl:when>
+                                <!-- Полигон -->
+                                <xsl:when test="(SpelementUnit[1]/Ordinate/@X | SpelementUnit[1]/Ordinate/@Y = SpelementUnit[last()]/Ordinate/@X | SpelementUnit[last()]/Ordinate/@Y) and (SpelementUnit[1]/@TypeUnit = 'Точка')">
+                                    <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                                    <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;polygons&quot;,&quot;Underground&quot;:',@Underground,',&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
+                                    <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[['"/>
+                                    <xsl:for-each select="SpelementUnit">                                            
+                                        <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
+                                        <xsl:if test="not(position() = last())">
+                                            <xsl:value-of select="','"/>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                    <xsl:value-of select="']]}}'"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:for-each select="SpelementUnit">
+                                        <xsl:value-of select="'{&quot;type&quot;:&quot;Feature&quot;,'"/>
+                                        <xsl:value-of select="concat('&quot;properties&quot;:{&quot;ObjectType&quot;:&quot;points&quot;,&quot;Underground&quot;:&quot;E&quot;,&quot;NumbCont&quot;:&quot;',@Number,'&quot;},')"/>
+                                        <xsl:value-of select="'&quot;geometry&quot;:{&quot;type&quot;:&quot;Point&quot;,&quot;coordinates&quot;:'"/>
+                                        <xsl:value-of select="concat('[',Ordinate/@Y,',',Ordinate/@X,']')"/>
+                                        <xsl:value-of select="',&quot;radius&quot;:&quot;0.5&quot;'"/>
+                                        <xsl:value-of select="'}}'"/>
+                                        <xsl:if test="not(position() = last())">
+                                            <xsl:text>, </xsl:text>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:if test="not(position() = last())">
