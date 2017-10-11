@@ -40,241 +40,297 @@
             <head>
                 <title>Технический план</title>
                 <meta name="Content-Style-Type" content="text/css"/>
-                <script type="text/javascript" src="http://d3js.org/d3.v4.min.js"/>
+                 <script type="text/javascript" src="http://d3js.org/d3.v4.min.js"/>
+                 <style type="text/css">
+                    body{
+                    background-color: #fff;
+                    color: #000;
+                    font-family: times new roman, arial, sans-serif;
+                    text-align: center;
+                    }
+                    th{
+                    color: #000;
+                    font-family: times new roman, arial, sans-serif;
+                    font-size: 10pt;
+                    font-weight: 400;
+                    text-align: center
+                    }
+                    td{
+                    color: #000;
+                    font-family: times new roman, arial, sans-serif;
+                    font-size: 10pt;
+                    font-weight: 400
+                    }
+                    table{
+                    <!--border-collapse: collapse;-->
+                    border-spacing: 0;
+                    empty-cells: show;
+                    }
+                    object{
+                        width: 100%; height: 1010px;
+                    }
+                    embed{
+                        width: 100%; height: 1010px;
+                    }
+                    .understroke{
+                    border-bottom: solid;
+                    border-bottom-width: 1px
+                    }
+                    .topstroke{
+                    border-top: solid;
+                    border-top-width: 1px;
+                    text-align: center;
+                    vertical-align: top;
+                    font: normal xx-small Arial, Verdana, Geneva, Helvetica, sans-serif;
+                    width: 90%;
+                    margin: 0 auto
+                    }
+                    .isOverPage{
+                        page-break-after: auto; 
+                        page-break-inside: avoid;
+                    }
+                    .tbl_section_title{
+                    width: 100%;
+                    border-width: 4px 4px 1px 4px;
+                    border-style: double double solid double;
+                    border-color: #000;
+                    margin-top: -4px;
+                    text-align: left;
+                    page-break-after: auto;
+                    page-break-inside: avoid;
+                    }
+                    .tbl_section_title TD{
+                    font: bold small Arial, Verdana, Geneva, Helvetica, sans-serif;
+                    margin: 0;
+                    padding: 10px 3px;
+                    }
+                    .tbl_section_title TH{
+                    border-width: 1px 1px 0px 0px;
+                    border-style: solid;
+                    border-color: #000;
+                    }
+                    .tbl_section_title TH:last-child{
+                    border-right: 0px;
+                    }
+                    .tbl_section_title TR:first-child TH{
+                    border-top: 0px;
+                    }
+                    .tbl_section_content{                        
+                    width: 100%;
+                    border-width: 0px 4px 4px 4px;
+                    border-style: double;
+                    border-color: #000;
+                    margin-top: -1px;
+                    text-align: left;
+                    }
+                    .tbl_section_content TD{
+                    border-width: 1px 1px 0px 0px;
+                    border-style: solid;
+                    border-color: #000;
+                    font: normal 10pt Arial, Verdana, Geneva, Helvetica, sans-serif;
+                    vertical-align: middle;
+                    margin: 0;
+                    padding: 4px 3px;
+                    }
+                    .tbl_section_content TD:last-child{
+                    border-right: 0px;
+                    }
+                    .tbl_section_content TR:first-child TD{
+                    border-top: 0px;
+                    }
+                    .tbl_section_content TR:last-child TD{
+                    border-bottom: 0px;
+                    }
+                    .tbl_section_content TH{
+                    border-width: 1px 1px 1px 0px;
+                    border-style: solid;
+                    border-color: #000;
+                    font-family: times new roman, arial, sans-serif;
+                    font-size: 10pt;
+                    font-weight: 400;
+                    text-align: center;
+                    }
+                    .tbl_section_content TH:last-child{
+                    border-right: 0px;
+                    }
+                    
+                    th.col5mm,td.col5mm{width: 5mm}
+                    th.col7mm,td.col7mm{width: 7mm}
+                    th.col7-5mm,td.col7-5mm{width: 7.5mm}
+                    th.col10mm,td.col10mm{width: 10mm}
+                    th.col15mm,td.col15mm{width: 15mm}
+                    th.col20mm,td.col20mm{width: 20mm}
+                    th.col25mm,td.col25mm{width: 25mm}
+                    th.col30mm,td.col30mm{width: 30mm}
+                    th.col35mm,td.col35mm{width: 35mm}
+                    th.col40mm,td.col40mm{width: 40mm}
+                    th.col50mm,td.col50mm{width: 50mm}
+                    th.col55mm,td.col55mm{width: 55mm}
+                    th.col60mm,td.col60mm{width: 60mm}
+                    th.col80mm,td.col80mm{width: 80mm}
+                    th.col105mm,td.col105mm{width: 105mm}
+                    
+                    .small_text{
+                    font: normal xx-small Arial, Verdana, Geneva, Helvetica, sans-serif;
+                    text-align: center
+                    }
+                    .windows{
+                    height: 300px;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    scrollbar-face-color: #ccc;
+                    scrollbar-shadow-color: #000;
+                    scrollbar-highlight-color: #fff;
+                    scrollbar-arrow-color: #000;
+                    scrollbar-base-color: Gray;
+                    scrollbar-3dlight-color: #eee;
+                    scrollbar-darkshadow-color: #333;
+                    scrollbar-track-color: #999
+                    }
+                    div.conclusion{
+                    word-break: break-all;
+                    }
+                    .pole{
+                        width: 90%;
+                    }
+                </style>
                 <style type="text/css">
-                        body{color:#000;font-family:times new roman, arial, sans-serif;text-align:center}
-                        table{border:0; width:180mm; margin-left:auto; margin-right:auto; border-collapse:collapse;empty-cells:show}
-                        table.tbl_container{border-collapse:collapse;border:0;padding:1px}
-                        
-                       
-                        th{color:#000;font-family:times new roman, arial, sans-serif;font-size:10pt;font-weight:400;text-align:center;}
-                        td{color:#000;font-family:times new roman, arial, sans-serif;font-size:10pt;font-weight:400;text-align:center;}                        
-                        span.center{text-align:center}
-                        div.title1{text-align:right;padding-right:10px;font-size:100%}
-                        div.title2{margin-left:auto;margin-right:auto;font-size:100%;text-align:center;}
-                        div.left{text-align:left;font-size:100%}
-                        div.center{text-align:center;font-size:100%}
-                        div.procherk{vertical-align:top;width:100%}
-                        span.undestroke{padding-left:4px;padding-right:4px;border-bottom:1px solid #000}
-                        object{width: 100%; height: 920px;}
-                        embed{width: 100%; height: 920px;}
-                        thead{display: table-header-group;}
-                        
-                        .tbl_section_sheet{
-                            border:3px double #000;
-                            padding:1px;
-                            margin-bottom:-3px;
-                        }
-                        .tbl_section_sheet_data{
-                            border-left-width: 3px;
-                            border-left-style: double;
-                            border-right-width: 3px;
-                            border-right-style: double;
-                            padding:1px;                    
-                            margin-bottom:-1px;
-                        }
-                        .tbl_border_bottom{
-                            border-bottom-width: 3px;
-                            border-bottom-style: double;
-                            padding:1px;
-                            margin-bottom:-3px;
-                        }
-                        .tbl_section_sheet th,.tbl_section_sheet td,
-                        .tbl_section_sheet_data th, .tbl_section_sheet_data td{
-                            text-align:center; 
-                            border:1px solid #000;
-                            vertical-align:middle;
-                            margin:0;
-                            padding:3px 3px;
-                        }
-                        .tbl_section_sheet th.left,.tbl_section_sheet td.left{text-align:left}
-                        .tbl_section_sheet_data th.left,.tbl_section_sheet_data td.left{text-align:left}                        
-                        
-                        .tbl_section_sheet th.vtop,.tbl_section_sheet td.vtop{vertical-align:top}
-                        
-                        .tbl_section_sheet th.vborder0,.tbl_section_sheet td.vborder0{border-left: 0px;border-right: 0px;}
-                        
-                        .tbl_section_sheet th.gborder0,.tbl_section_sheet td.gborder0{border-bottom: 0px;border-top: 0px;}
-                        .tbl_section_sheet_data th.gborder0,.tbl_section_sheet_data td.gborder0{border-bottom: 0px;border-top: 0px;}
-                        
-                        .tbl_section_sheet_data th.col5mm,.tbl_section_sheet_data td.col5mm{width: 5mm}
-                        .tbl_section_sheet_data th.col7mm,.tbl_section_sheet_data td.col7mm{width: 7mm}
-                        .tbl_section_sheet_data th.col7-5mm,.tbl_section_sheet_data td.col7-5mm{width: 7.5mm}
-                        .tbl_section_sheet_data th.col10mm,.tbl_section_sheet_data td.col10mm{width: 10mm}
-                        .tbl_section_sheet_data th.col15mm,.tbl_section_sheet_data td.col15mm{width: 15mm}
-                        .tbl_section_sheet_data th.col20mm,.tbl_section_sheet_data td.col20mm{width: 20mm}
-                        .tbl_section_sheet_data th.col25mm,.tbl_section_sheet_data td.col25mm{width: 25mm}
-                        .tbl_section_sheet_data th.col30mm,.tbl_section_sheet_data td.col30mm{width: 30mm}
-                        .tbl_section_sheet_data th.col35mm,.tbl_section_sheet_data td.col35mm{width: 35mm}
-                        .tbl_section_sheet_data th.col40mm,.tbl_section_sheet_data td.col40mm{width: 40mm}
-                        .tbl_section_sheet_data th.col50mm,.tbl_section_sheet_data td.col50mm{width: 50mm}
-                        .tbl_section_sheet_data th.col55mm,.tbl_section_sheet_data td.col55mm{width: 55mm}
-                        .tbl_section_sheet_data th.col60mm,.tbl_section_sheet_data td.col60mm{width: 60mm}
-                        .tbl_section_sheet_data th.col80mm,.tbl_section_sheet_data td.col80mm{width: 80mm}
-                        .tbl_section_sheet_data th.col105mm,.tbl_section_sheet_data td.col105mm{width: 105mm}
-                        
-                        .fontsize8{font-size: 8pt;}
-                        
-                        div.conclusion{word-break: break-all;}
-                        @media print{
-                            .notprint{display:none}
-                        }
-                    </style>
-                <style type="text/css">
-                    svg {
+                    svg{
                         background-color: black;
                         margin-top: 2px;
                     }
-                    rect {
-                        fill:none;
-                        pointer-events:all;
+                    rect{
+                        fill: none;
+                        pointer-events: all;
                     }
-                    .points0 {
-                        fill:green;
-                        stroke:green;
+                    .points0{
+                        fill: green;
+                        stroke: green;
                     }
-                    .points1 {
-                        fill:lightgreen;
-                        stroke:lightgreen;
+                    .points1{
+                        fill: lightgreen;
+                        stroke: lightgreen;
                     }
-                    .points2 {
-                        fill:greenyellow;
-                        stroke:greenyellow;
+                    .points2{
+                        fill: greenyellow;
+                        stroke: greenyellow;
                     }
-                    .polylines0 {
-                        fill:none;
-                        stroke:white;
-                        stroke-width:0.5;
+                    .polylines0{
+                        fill: none;
+                        stroke: white;
+                        stroke-width: 0.5;
                     }
-                    .polylines1 {
-                        fill:none;
-                        stroke:white;
-                        stroke-width:0.5;
-                        stroke-dasharray: 5,1,0.5,1,0.5,1;
+                    .polylines1{
+                        fill: none;
+                        stroke: white;
+                        stroke-width: 0.5;
+                        stroke-dasharray: 5, 1, 0.5, 1, 0.5, 1;
                     }
-                    .polylines2 {
-                        fill:none;
-                        stroke:white;
-                        stroke-width:0.5;
-                        stroke-dasharray: 5,1,0.5,1;
-                    }
-                    <!--
-                    g.polygons {
+                    .polylines2{
+                        fill: none;
+                        stroke: white;
+                        stroke-width: 0.5;
+                        stroke-dasharray: 5, 1, 0.5, 1;
+                    }<!--
+                    g.polygons{
                         -webkit-filter: invert(100%);
                         filter: invert(100%);
-                    }
-                    -->
-                    .polygons0 {
-                        fill:gray;
-                        stroke:none;
-                        stroke-width:0.1;
+                    }-->
+                    .polygons0{
+                        fill: gray;
+                        stroke: none;
+                        stroke-width: 0.1;
                         mix-blend-mode: difference;
                     }
-                    .polygons1 {
-                        fill:lightgray;
-                        stroke:none;
-                        stroke-width:0.1;
+                    .polygons1{
+                        fill: lightgray;
+                        stroke: none;
+                        stroke-width: 0.1;
                         mix-blend-mode: difference;
                     }
-                    .polygons2 {
-                        fill:darkgray;
-                        stroke:none;
-                        stroke-width:0.1;
+                    .polygons2{
+                        fill: darkgray;
+                        stroke: none;
+                        stroke-width: 0.1;
                         mix-blend-mode: difference;
                     }
-                    .pointsE {
-                        fill:red;
-                        stroke:red;
-                    }
-                </style>
+                    .pointsE{
+                        fill: red;
+                        stroke: red;
+                    }</style>
                 <style type="text/css">
-                    .pole {
-                        width: 95%;
-                        margin: 0;
-                        border: 0px solid #C0C0C0;
-                        border-bottom: 0px solid #B0B0B0;
-                        padding: 4px;
-                        font-size: 10pt;
-                        font-family: times new roman, arial, sans-serif;
-                        font-weight: 400;
-                        line-height: 10pt;                        
+                    @media print{
+                        .pole{
+                                width: 95%;
+                                text-decoration: underline;
+                                border: 0px solid #C0C0C0;
+                                font-family: inherit;
+                                font-size: inherit;
                         }
-                    .zone {
-                        text-decoration: underline;
-                        width: 25%;
+                        .zone {
+                            text-decoration: underline;
+                            width: 25%;
                         }
-                    .date_center {
-                        text-align: center;
-                        text-decoration: underline;
+                        .date_center {
+                            text-align: center;
+                            text-decoration: underline;
                         }
-                    a.plan {
-                        text-decoration: none;
+                        a.plan {
+                            text-decoration: none;
                         }
+                        .notPrint{
+                            display:none
+                        }
+                    }
                 </style>
             </head>
             <body>
-                <table>                    
-                    <tbody>
-                        <tr>
-                            <th class="vtop">
-                                <table class="tbl_container">                                    
-                                    <tbody>
-                                        <tr>
-                                            <th>
-                                                <div>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td style="font-size: 7pt;text-align: left;">
-                                                                    <xsl:value-of select="//comment()"/>
-                                                                </td> 
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <xsl:choose>
-                                                        <xsl:when test="descendant::Building">
-                                                            <xsl:call-template name="header1">
-                                                                <xsl:with-param name="text1" select="'ТЕХНИЧЕСКИЙ ПЛАН'"/>
-                                                                <xsl:with-param name="text2" select="'ЗДАНИЯ'"/>
-                                                            </xsl:call-template>
-                                                            <xsl:apply-templates select="$building"/>
-                                                        </xsl:when>
-                                                        <xsl:when test="descendant::Construction">
-                                                            <xsl:call-template name="header1">
-                                                                <xsl:with-param name="text1" select="'ТЕХНИЧЕСКИЙ ПЛАН'"/>
-                                                                <xsl:with-param name="text2" select="'СООРУЖЕНИЯ'"/>
-                                                            </xsl:call-template>
-                                                            <xsl:apply-templates select="$construction"/>
-                                                        </xsl:when>
-                                                        <xsl:when test="descendant::Uncompleted">
-                                                            <xsl:call-template name="header1">
-                                                                <xsl:with-param name="text1" select="'ТЕХНИЧЕСКИЙ ПЛАН'"/>
-                                                                <xsl:with-param name="text2" select="'ОБЪЕКТ НЕЗАВЕРШЕННОГО СТРОИТЕЛЬСТВА'"/>
-                                                            </xsl:call-template>
-                                                            <xsl:apply-templates select="$uncompleted"/>
-                                                        </xsl:when>
-                                                        <xsl:when test="descendant::Flat">
-                                                            <xsl:call-template name="header1">
-                                                                <xsl:with-param name="text1" select="'ТЕХНИЧЕСКИЙ ПЛАН'"/>
-                                                                <xsl:with-param name="text2" select="'ПОМЕЩЕНИЯ'"/>
-                                                            </xsl:call-template>
-                                                            <xsl:apply-templates select="$flat"/>
-                                                        </xsl:when>
-                                                        <xsl:otherwise>
-                                                            <tr>
-                                                                <td>НЕВЕРНЫЙ ХМЛ ФАЙЛ</td>
-                                                            </tr>
-                                                        </xsl:otherwise>
-                                                    </xsl:choose>                                                    
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="margin:0 auto; width: 200mm;">
+                    <div class="small_text" style="margin-bottom: 5px;text-align: left;">
+                        <xsl:value-of select="//comment()"/>
+                    </div>                    
+                    <xsl:choose>
+                        <xsl:when test="descendant::Building">                            
+                            <xsl:call-template name="header1">
+                                <xsl:with-param name="text1" select="'ТЕХНИЧЕСКИЙ ПЛАН'"/>
+                                <xsl:with-param name="text2" select="'ЗДАНИЯ'"/>
+                            </xsl:call-template>
+                            <xsl:apply-templates select="$building"/>
+                        </xsl:when>
+                        <xsl:when test="descendant::Construction">
+                            <xsl:call-template name="header1">
+                                <xsl:with-param name="text1" select="'ТЕХНИЧЕСКИЙ ПЛАН'"/>
+                                <xsl:with-param name="text2" select="'СООРУЖЕНИЯ'"/>
+                            </xsl:call-template>
+                            <xsl:apply-templates select="$construction"/>
+                        </xsl:when>
+                        <xsl:when test="descendant::Uncompleted">
+                            <xsl:call-template name="header1">
+                                <xsl:with-param name="text1" select="'ТЕХНИЧЕСКИЙ ПЛАН'"/>
+                                <xsl:with-param name="text2"
+                                    select="'ОБЪЕКТ НЕЗАВЕРШЕННОГО СТРОИТЕЛЬСТВА'"/>
+                            </xsl:call-template>
+                            <xsl:apply-templates select="$uncompleted"/>
+                        </xsl:when>
+                        <xsl:when test="descendant::Flat">
+                            <xsl:call-template name="header1">
+                                <xsl:with-param name="text1" select="'ТЕХНИЧЕСКИЙ ПЛАН'"/>
+                                <xsl:with-param name="text2" select="'ПОМЕЩЕНИЯ'"/>
+                            </xsl:call-template>
+                            <xsl:apply-templates select="$flat"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <tr>
+                                <td>НЕВЕРНЫЙ ХМЛ ФАЙЛ</td>
+                            </tr>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </div>
+                <xsl:if test="//EntitySpatial">
+                    <xsl:call-template name="GenerateMap">
+                        <xsl:with-param name="entitySpatial" select="//EntitySpatial"></xsl:with-param>
+                    </xsl:call-template>
+                </xsl:if>
             </body>
         </html>
     </xsl:template>
@@ -344,209 +400,223 @@
         <xsl:apply-templates select="SchemeGeodesicPlotting"/>
         <xsl:apply-templates select="SchemeDisposition"/>
         <xsl:apply-templates select="DiagramContour"/>
-        <xsl:apply-templates select="Appendix"/>
-        <xsl:if test="//EntitySpatial">
-            <xsl:call-template name="GenerateMap">
-                <xsl:with-param name="entitySpatial" select="//EntitySpatial"></xsl:with-param>
-            </xsl:call-template>
-        </xsl:if>        
+        <xsl:apply-templates select="Appendix"/>                
     </xsl:template>
     <xsl:template match="GeneralCadastralWorks">
-        <table class="tbl_section_sheet">
+        <table class="tbl_section_title">
             <tbody>
                 <tr>
-                    <th class="left gborder0">
+                    <td>
                         <b>1. Технический план подготовлен в результате выполнения кадастровых работ в связи с:</b>
-                    </th>
+                    </td>
                 </tr>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
+            <tbody>
                 <tr>
-                    <td class="left gborder0">
+                    <td >
                         <xsl:value-of select="Reason"/>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <table class="tbl_section_sheet">
+        <table class="tbl_section_title">
             <tbody>
                 <tr>
-                    <th class="left gborder0">
+                    <td>
                         <b>2. Сведения о заказчике кадастровых работ</b>
-                    </th>
-                </tr>
-                <tr>
-                    <td class="left gborder0"> 
-                        <xsl:for-each select="Clients/Client">            
-                            <xsl:choose>
-                                <xsl:when test="Person">
-                                    <xsl:call-template name="fio">
-                                        <xsl:with-param name="familyName"
-                                            select="Person/FamilyName"/>
-                                        <xsl:with-param name="firstName"
-                                            select="Person/FirstName"/>
-                                        <xsl:with-param name="patronymic"
-                                            select="Person/Patronymic"/>
-                                    </xsl:call-template>
-                                    <xsl:choose>
-                                        <xsl:when test="Person/SNILS">
-                                            <xsl:value-of select="Person/SNILS"/>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:apply-templates select="Person/Address"/>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
-                                </xsl:when>
-                                <xsl:when test="Organization">
-                                    <xsl:call-template name="tIdentify">
-                                        <xsl:with-param name="identify" select="Organization"/>
-                                    </xsl:call-template>
-                                </xsl:when>
-                                <xsl:when test="Governance">
-                                    <xsl:call-template name="tIdentify">
-                                        <xsl:with-param name="identify" select="Governance"/>
-                                    </xsl:call-template>
-                                </xsl:when>
-                                <xsl:when test="ForeignOrganization">
-                                    <xsl:call-template name="tIdentify">
-                                        <xsl:with-param name="identify" select="Governance"/>
-                                    </xsl:call-template>
-                                    <xsl:value-of select="Governance/Country"/>
-                                </xsl:when>
-                            </xsl:choose>
-                            <xsl:if test="position() != last()">
-                                <xsl:value-of select="'; '"/>
-                            </xsl:if>
-                        </xsl:for-each>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <table class="tbl_section_sheet">
-            <tr>
-                <th colspan="2" class="left">
-                    <b>3. Сведения о кадастровом инженере:</b>
-                </th>               
-            </tr>
-            <tr>
-                <td  class="left vborder0">
-                    <xsl:text>Фамилия, имя, отчество </xsl:text>
-                    <i>(при наличии отчества) </i>
-                </td>
-                <td  class="left vborder0">
-                    <ins>
-                        <xsl:call-template name="fio">
-                            <xsl:with-param name="familyName"
-                                select="Contractor/FamilyName"/>
-                            <xsl:with-param name="firstName"
-                                select="Contractor/FirstName"/>
-                            <xsl:with-param name="patronymic"
-                                select="Contractor/Patronymic"/>
+        <table class="tbl_section_content">
+            <tbody>
+                <tr>
+                    <td style="text-align: center; width: 100%; border: none;">
+                        <div class="understroke">
+                            <xsl:for-each select="Clients/Client">            
+                                <xsl:choose>
+                                    <xsl:when test="Person">
+                                        <xsl:call-template name="fio">
+                                            <xsl:with-param name="familyName"
+                                                select="Person/FamilyName"/>
+                                            <xsl:with-param name="firstName"
+                                                select="Person/FirstName"/>
+                                            <xsl:with-param name="patronymic"
+                                                select="Person/Patronymic"/>
+                                        </xsl:call-template>
+                                        <xsl:choose>
+                                            <xsl:when test="Person/SNILS">
+                                                <xsl:value-of select="Person/SNILS"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:apply-templates select="Person/Address"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:when>
+                                    <xsl:when test="Organization">
+                                        <xsl:call-template name="tIdentify">
+                                            <xsl:with-param name="identify" select="Organization"/>
+                                        </xsl:call-template>
+                                    </xsl:when>
+                                    <xsl:when test="Governance">
+                                        <xsl:call-template name="tIdentify">
+                                            <xsl:with-param name="identify" select="Governance"/>
+                                        </xsl:call-template>
+                                    </xsl:when>
+                                    <xsl:when test="ForeignOrganization">
+                                        <xsl:call-template name="tIdentify">
+                                            <xsl:with-param name="identify" select="Governance"/>
+                                        </xsl:call-template>
+                                        <xsl:value-of select="Governance/Country"/>
+                                    </xsl:when>
+                                </xsl:choose>
+                                <xsl:if test="position() != last()">
+                                    <xsl:value-of select="'; '"/>
+                                </xsl:if>
+                            </xsl:for-each>
+                        </div>
+                        <div class="small_text"> (фамилия, имя, отчество (при наличии отчества)
+                            физического лица, страховой номер индивидуального лицевого счета (при
+                            наличии), полное наименование юридического лица, органа государственной
+                            власти, органа местного самоуправления, иностранного юридического лица с
+                            указанием страны его регистрации (инкорпорации)) </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="tbl_section_title">
+            <tbody>
+                <tr>
+                    <td>
+                        <b>3. Сведения о кадастровом инженере:</b>
+                    </td>               
+                </tr>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
+            <tbody>
+                <tr>
+                    <td width="50%" > Фамилия, имя, отчество (при
+                        наличии отчества) </td>
+                    <td width="50%" >
+                        <ins>
+                            <xsl:call-template name="fio">
+                                <xsl:with-param name="familyName"
+                                    select="Contractor/FamilyName"/>
+                                <xsl:with-param name="firstName"
+                                    select="Contractor/FirstName"/>
+                                <xsl:with-param name="patronymic"
+                                    select="Contractor/Patronymic"/>
+                            </xsl:call-template>
+                        </ins>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" >
+                        <xsl:text>Страховой номер индивидуального лицевого счета </xsl:text>
+                    </td>
+                    <td width="50%" >
+                        <xsl:call-template name="inputText"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" >
+                        <xsl:text>N регистрации в государственном реестре лиц, осуществляющих кадастровую деятельность</xsl:text>
+                    </td>
+                    <td width="50%" >
+                        <xsl:call-template name="inputText"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" >
+                        <xsl:text>Контактный телефон</xsl:text>
+                    </td>
+                    <td width="50%" >
+                        <ins>
+                            <xsl:value-of select="Contractor/Telephone"/>
+                        </ins>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" >
+                        <xsl:text>Почтовый адрес и адрес электронной почты, по которым осуществляется связь с кадастровым инженером</xsl:text>
+                    </td>
+                    <td width="50%" >
+                        <ins>
+                            <xsl:value-of select="Contractor/Address"/>
+                            <xsl:value-of select="concat(' ',Contractor/Email)"/>
+                        </ins>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" >
+                        <xsl:text>Наименование саморегулируемой организации кадастровых инженеров, членом которой является кадастровый инженер</xsl:text>
+                    </td>
+                    <td width="50%" >
+                        <xsl:call-template name="inputText"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" >
+                        <xsl:text>Сокращенное наименование юридического лица, если кадастровый инженер является работником юридического лица</xsl:text>
+                    </td>
+                    <td width="50%" >
+                        <xsl:choose>
+                            <xsl:when test="Contractor/Organization">
+                                <ins>
+                                    <xsl:value-of select="Contractor/Organization/Name"/>
+                                </ins>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:call-template name="procherk"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" >
+                        <xsl:text>N и дата заключения договора на выполнение кадастровых работ</xsl:text>
+                    </td>
+                    <td width="50%" >
+                        <xsl:call-template name="inputText">
+                            <xsl:with-param name="textarea" select="'true'"/>
                         </xsl:call-template>
-                    </ins>
-                </td>
-            </tr>
-            <tr>
-                <td class="left vborder0">
-                    <xsl:text>Страховой номер индивидуального лицевого счета </xsl:text>
-                </td>
-                <td class="left vborder0">
-                    <xsl:call-template name="inputText"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="left vborder0">
-                    <xsl:text>N регистрации в государственном реестре лиц, осуществляющих кадастровую деятельность</xsl:text>
-                </td>
-                <td class="left vborder0">
-                    <xsl:call-template name="inputText"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="left vborder0">
-                    <xsl:text>Контактный телефон</xsl:text>
-                </td>
-                <td class="left vborder0">
-                    <ins>
-                        <xsl:value-of select="Contractor/Telephone"/>
-                    </ins>
-                </td>
-            </tr>
-            <tr>
-                <td class="left vborder0">
-                    <xsl:text>Почтовый адрес и адрес электронной почты, по которым осуществляется связь с кадастровым инженером</xsl:text>
-                </td>
-                <td class="left vborder0">
-                    <ins>
-                        <xsl:value-of select="Contractor/Address"/>
-                        <xsl:value-of select="concat(' ',Contractor/Email)"/>
-                    </ins>
-                </td>
-            </tr>
-            <tr>
-                <td class="left vborder0">
-                    <xsl:text>Наименование саморегулируемой организации кадастровых инженеров, членом которой является кадастровый инженер</xsl:text>
-                </td>
-                <td class="left vborder0">
-                    <xsl:call-template name="inputText"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="left vborder0">
-                    <xsl:text>Сокращенное наименование юридического лица, если кадастровый инженер является работником юридического лица</xsl:text>
-                </td>
-                <td class="left vborder0">
-                    <xsl:choose>
-                        <xsl:when test="Contractor/Organization">
-                            <ins>
-                                <xsl:value-of select="Contractor/Organization/Name"/>
-                            </ins>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:call-template name="procherk"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </td>
-            </tr>
-            <tr>
-                <td class="left vborder0">
-                    <xsl:text>N и дата заключения договора на выполнение кадастровых работ</xsl:text>
-                </td>
-                <td class="left vborder0">
-                    <xsl:call-template name="inputText">
-                        <xsl:with-param name="textarea" select="'true'"/>
-                    </xsl:call-template>
-                </td>
-            </tr>
-            <tr>
-                <td class="left vborder0">
-                    <xsl:text>Дата подготовки технического плана (число, месяц, год)</xsl:text>                    
-                </td>
-                <td class="left vborder0">
-                    <xsl:value-of select="substring(@DateCadastral, 9, 2)"/>.
-                    <xsl:value-of select="substring(@DateCadastral, 6, 2)"/>.
-                    <xsl:value-of select="substring(@DateCadastral, 1, 4)"/> 
-                </td>
-            </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" >
+                        <xsl:text>Дата подготовки технического плана (число, месяц, год)</xsl:text>                    
+                    </td>
+                    <td width="50%" >
+                        <xsl:value-of select="substring(@DateCadastral, 9, 2)"/>.
+                        <xsl:value-of select="substring(@DateCadastral, 6, 2)"/>.
+                        <xsl:value-of select="substring(@DateCadastral, 1, 4)"/> 
+                    </td>
+                </tr>                
+            </tbody>
         </table>
     </xsl:template>
     <xsl:template match="InputData">
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Исходные данные'"/>
         </xsl:call-template>
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
-                    <tr>
-                        <th colspan="3" class="left">
-                            <b>1. Перечень документов, использованных при подготовке технического плана</b>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="col5mm">№<br/>п/п</th>
-                        <th class="col105mm">Наименование документа</th>
-                        <th>Реквизиты документа</th>
-                    </tr>
-                </table>
-            </caption>
+        <table class="tbl_section_title">
+            <tbody>
+                <tr>
+                    <td colspan="3">
+                        <b>1. Перечень документов, использованных при подготовке технического плана</b>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="col5mm">№<br/>п/п</th>
+                    <th class="col105mm">Наименование документа</th>
+                    <th>Реквизиты документа</th>
+                </tr>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col5mm">1</th>
@@ -569,11 +639,10 @@
                 </xsl:choose>
             </tbody>
         </table>
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="8" class="left">
+                        <td colspan="8" class="left">
                             <b>2. Сведения о геодезической основе, использованной при подготовке технического плана
                                 <br />
                                 <xsl:text>Система координат </xsl:text>
@@ -586,7 +655,7 @@
                                     </xsl:for-each>
                                 </ins>                                
                             </b>
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th rowspan="2" class="col5mm">№<br/>п/п</th>
@@ -598,7 +667,7 @@
                                 <xsl:with-param name="date_center" select="'true'"/>
                             </xsl:call-template>
                         </th>
-                    </tr>
+                    </tr>            
                     <tr>
                         <th class="col20mm">X</th>
                         <th class="col20mm">Y</th>
@@ -606,8 +675,9 @@
                         <th class="col20mm">центра пункта</th>
                         <th class="col20mm">марки</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col5mm">1</th>
@@ -640,13 +710,12 @@
                 </xsl:choose>
             </tbody>
         </table>
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="4" class="left">
+                        <td colspan="4" class="left">
                             <b>3. Сведения о средствах измерений</b>
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th class="col5mm">№<br/>п/п</th>
@@ -654,8 +723,9 @@
                         <th class="col55mm">Сведения об утверждении типа средств измерений</th>
                         <th>Реквизиты свидетельства о поверке прибора (инструмента, аппаратуры)</th>
                     </tr>
+            </tbody>
                 </table>
-            </caption>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col5mm">1</th>
@@ -677,24 +747,23 @@
                              <td><xsl:call-template name="procherk"/></td>
                          </tr>
                      </xsl:otherwise>
-                 </xsl:choose>
-                 
+                 </xsl:choose>                 
             </tbody>
         </table>
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="2" class="left">
+                        <td colspan="2" class="left">
                             <b>4. Сведения об объекте (объектах) недвижимости, из которого (которых) был образован объект недвижимости</b>
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th class="col5mm">№<br/>п/п</th>
                         <th>Кадастровый номер</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col5mm">1</th>
@@ -720,29 +789,33 @@
                 </xsl:choose>
             </tbody>
         </table>
-        <table class="tbl_section_sheet_data">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="2" class="left">
+                        <td colspan="2" class="left">
                             <b>5. Сведения о помещениях, машино-местах, расположенных в здании, сооружении</b>
-                        </th>
+                        </td>
                     </tr>
+            </tbody>
+        </table>
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="2" class="left">
+                        <td colspan="2" class="left">
                             <b>5.1. Сведения о помещениях, расположенных в здании, сооружении</b>    
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th class="col5mm">№<br/>п/п</th>
                         <th>Кадастровый номер помещения</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
-                    <td class="col5mm">1</td>
-                    <td>2</td>
+                    <th class="col5mm">1</th>
+                    <th>2</th>
                 </tr>
             </thead>
             <tbody>
@@ -762,20 +835,20 @@
                 </xsl:choose>                
             </tbody>
         </table>
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="2" class="left">
+                        <td colspan="2" class="left">
                             <b>5.2. Сведения о машино-местах, расположенных в здании, сооружении</b>    
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th class="col5mm">№<br/>п/п</th>
                         <th>Кадастровый номер машино-места</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th  class="col5mm">1</th>
@@ -804,21 +877,21 @@
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Сведения о выполненных измерениях и расчетах'"/>
         </xsl:call-template>
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="3" class="left">
+                        <td colspan="3" class="left">
                             <b>1. Метод определения координат характерных точек контура объекта недвижимости, части (частей) объекта недвижимости</b>
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th class="col40mm">Номер контура</th>
                         <th class="col35mm">Номера характерных точек контура</th>
                         <th>Метод определения координат</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col40mm">1</th>
@@ -841,21 +914,21 @@
                 </xsl:choose>
             </tbody>
         </table>    
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="3" class="left">
+                        <td colspan="3" class="left">
                             <b>2. Точность определения координат характерных точек контура объекта недвижимости</b>
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th class="col40mm">Номер контура</th>
                         <th class="col35mm">Номера характерных точек контура</th>
                         <th>Формулы, примененные для расчетасредней квадратической погрешности определения координат характерных точек контура(Mt),м</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col40mm">1</th>
@@ -878,13 +951,12 @@
                 </xsl:choose>
             </tbody>
         </table>
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="4" class="left">
+                        <td colspan="4" class="left">
                             <b>3. Точность определения координат характерных точек контура части (частей) объекта недвижимости</b>
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th class="col40mm">Номер контура</th>
@@ -892,8 +964,9 @@
                         <th class="col35mm">Учетный номер или обозначение части</th>
                         <th>Формулы, примененные для расчетасредней квадратической погрешности определения координат характерных точек контура(Mt),м</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col40mm">1</th>
@@ -923,18 +996,21 @@
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Описание местоположения объекта недвижимости'"/>
         </xsl:call-template>        
-        <table class="tbl_section_sheet_data">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="9" class="left">
+                        <td colspan="9" class="left">
                             <b>1. Описание местоположения здания, сооружения, объекта незавершенного строительства на земельном участке</b>
-                        </th>
+                        </td>
                     </tr>
+            </tbody>
+        </table>
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="9" class="left gborder0">
+                        <td colspan="9" class="left gborder0">
                             <b>1.1. Сведения о характерных точках контура объекта недвижимости</b>    
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="9" class="left gborder0">
@@ -959,19 +1035,20 @@
                         <th class="col7-5mm fontsize8">H1</th>
                         <th class="col7-5mm fontsize8">H2</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
-                    <td class="col40mm">1</td>
-                    <td class="col20mm">2</td>
-                    <td class="col20mm">3</td>
-                    <td class="col20mm">4</td>
-                    <td class="col7mm">5</td>
-                    <td>6</td>
-                    <td class="col20mm">7</td>
-                    <td class="col7-5mm">8</td>
-                    <td class="col7-5mm">9</td>
+                    <th class="col40mm">1</th>
+                    <th class="col20mm">2</th>
+                    <th class="col20mm">3</th>
+                    <th class="col20mm">4</th>
+                    <th class="col7mm">5</th>
+                    <th>6</th>
+                    <th class="col20mm">7</th>
+                    <th class="col7-5mm">8</th>
+                    <th class="col7-5mm">9</th>
                 </tr>
             </thead>
             <tbody>
@@ -995,13 +1072,17 @@
                 </xsl:choose>
             </tbody>
         </table>
-        <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
             <tbody>
                 <tr>
-                    <th colspan="2" class="left">
+                    <td colspan="2" class="left">
                         <b>1.2. Сведения о предельных глубине и высоте конструктивных элементов объекта недвижимости</b>
-                    </th>
+                    </td>
                 </tr>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
+            <tbody>
                 <tr>
                     <td class="col105mm left">
                         <xsl:text>Предельная глубина конструктивных элементов объекта недвижимости, м</xsl:text>
@@ -1016,13 +1097,12 @@
                 </tr>
             </tbody>
         </table>
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="9" class="left gborder0">
+                        <td colspan="9" class="left gborder0">
                             <b>1.3. Сведения о характерных точках пересечения контура объекта недвижимости с контуром (контурами) иных зданий, сооружений, объектов незавершенного строительства</b>    
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="9" class="left gborder0">
@@ -1045,10 +1125,11 @@
                         <th class="col20mm">X</th>
                         <th class="col20mm">Y</th>
                         <th class="col7-5mm">H1</th>
-                        <th class="col7-5mm">H2</th>
+                        <th class="col7-5mm" style="border-right: 1px solid;">H2</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col15mm">1</th>
@@ -1096,16 +1177,16 @@
         <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Характеристики объекта недвижимости'"/>
         </xsl:call-template> 
-        <table class="tbl_section_sheet_data tbl_border_bottom">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
                         <th class="col5mm">N п/п</th>
                         <th class="col80mm">Наименование характеристики</th>
                         <th>Значение характеристики</th>
                     </tr>
-                </table>
-            </caption>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
                     <th class="col5mm">1</th>
@@ -1498,23 +1579,26 @@
             <xsl:with-param name="text1" select="'Сведения о части (частях) объекта недвижимости'"/>
         </xsl:call-template>
         <xsl:for-each select="NewSubBuilding | ExistSubBuilding | NewSubConstruction | ExistSubConstruction | NewSubUncompleted | ExistSubUncompleted | NewSubFlat | ExistSubFlat">
-            <table class="tbl_section_sheet_data">
-                <caption>
-                    <table class="tbl_section_sheet_data">
+            <table class="tbl_section_title">
+                <tbody>
                         <tr>
-                            <th colspan="6" class="left">
+                            <td colspan="6" class="left">
                                 <xsl:value-of select="concat('Учетный номер или обозначение части: ', @Definition,preceding-sibling::CadastralNumber/text())"/>
-                            </th>
+                            </td>
                         </tr>
                         <tr>
-                            <th colspan="6" class="left">
+                            <td colspan="6" class="left">
                                 <b>1. Сведения о местоположении части объекта недвижимости</b>    
-                            </th>
+                            </td>
                         </tr>
+                </tbody>
+            </table>
+            <table class="tbl_section_title">
+                <tbody>
                         <tr>
-                            <th colspan="6" class="left gborder0">
+                            <td colspan="6" class="left gborder0">
                                 <b>1.1. Описание местоположения части объекта недвижимости в виде контура</b>    
-                            </th>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="6" class="left gborder0">
@@ -1535,16 +1619,17 @@
                             <th class="col20mm">X</th>
                             <th class="col20mm">Y</th>
                         </tr>
-                    </table>
-                </caption>
+                </tbody>
+            </table>
+            <table class="tbl_section_content">
                 <thead>
                     <tr>
-                        <td class="col20mm">1</td>
-                        <td class="col20mm">2</td>
-                        <td class="col20mm">3</td>
-                        <td>4</td>
-                        <td class="col30mm">5</td>
-                        <td class="col40mm">6</td>
+                        <th class="col20mm">1</th>
+                        <th class="col20mm">2</th>
+                        <th class="col20mm">3</th>
+                        <th>4</th>
+                        <th class="col30mm">5</th>
+                        <th class="col40mm">6</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1567,13 +1652,17 @@
                     </xsl:choose>
                 </tbody>
             </table>
-            <table class="tbl_section_sheet_data">
+            <table class="tbl_section_title">
                 <tbody>
                     <tr>
-                        <th class="left gborder0">
+                        <td class="left gborder0">
                             <b>1.2. Иное описание местоположения части объекта недвижимости</b>    
-                        </th>
+                        </td>
                     </tr>
+                </tbody>
+            </table>
+            <table class="tbl_section_content">
+                <tbody>
                     <tr>
                         <td class="left gborder0">
                             <xsl:value-of select="Description"/>
@@ -1582,28 +1671,28 @@
                 </tbody>
             </table>
         </xsl:for-each>
-        <table class="tbl_section_sheet_data">
-            <caption>
-                <table class="tbl_section_sheet_data">
+        <table class="tbl_section_title">
+            <tbody>
                     <tr>
-                        <th colspan="4" class="left">
+                        <td colspan="4" class="left">
                             <b>2. Общие сведения о части объекта недвижимости</b>    
-                        </th>
+                        </td>
                     </tr>
                     <tr>
                         <th class="col5mm">№<br/>п/п</th>
                         <th class="col40mm">Учетный номер и обозначение части</th>
                         <th class="col40mm">Площадь (Р), / протяженность</th>
                         <th>Характеристика части</th>
-                    </tr>                    
-                </table>
-            </caption>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="tbl_section_content">
             <thead>
                 <tr>
-                    <td class="col5mm">1</td>
-                    <td class="col40mm">2</td>
-                    <td class="col40mm">3</td>
-                    <td>4</td>
+                    <th class="col5mm">1</th>
+                    <th class="col40mm">2</th>
+                    <th class="col40mm">3</th>
+                    <th>4</th>
                 </tr>
             </thead>
             <tbody>
@@ -1627,10 +1716,11 @@
         </table>
     </xsl:template>
     <xsl:template match="Conclusion">
-        <xsl:call-template name="header1">
+        <div class="isOverPage">
+            <xsl:call-template name="header1">
             <xsl:with-param name="text1" select="'Заключение кадастрового инженера'"/>
         </xsl:call-template>
-        <table class="tbl_section_sheet">
+            <table class="tbl_section_content">
             <tbody>
                 <tr>
                     <td class="left">
@@ -1641,17 +1731,14 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </xsl:template>
     <xsl:template match="SchemeGeodesicPlotting">
         <xsl:call-template name="newPage"/>
-        <table class="tbl_container notprint">
-            <tbody>
-                <tr>
-                    <td>
-                        <xsl:call-template name="header1">
+        <xsl:call-template name="header1">
                             <xsl:with-param name="text1" select="'Схема геодезических построений'"/>
                         </xsl:call-template>
-                        <table class="tbl_section_sheet">
+        <table class="tbl_section_content">
                             <tbody>
                                 <tr>
                                     <td class="left">                        
@@ -1662,21 +1749,13 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </xsl:template>
     <xsl:template match="SchemeDisposition">
         <xsl:call-template name="newPage"/>
-        <table class="tbl_container notprint">
-            <tbody>
-                <tr>
-                    <td>
-                        <xsl:call-template name="header1">
+        <xsl:call-template name="header1">
                             <xsl:with-param name="text1" select="'Схема расположения'"/>
                         </xsl:call-template>
-                        <table class="tbl_section_sheet">
+        <table class="tbl_section_content">
                             <tbody>
                                 <tr>
                                     <td class="left">                        
@@ -1687,24 +1766,16 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </xsl:template>
     <xsl:template match="DiagramContour">
-        <table class="tbl_container notprint">
-            <tbody>
-                <tr>
-                    <td>
-                        <xsl:choose>
+        <xsl:choose>
                             <xsl:when test="AppliedFile">
                                 <xsl:for-each select="AppliedFile">
                                     <xsl:call-template name="newPage"/>
                                     <xsl:call-template name="header1">
                                         <xsl:with-param name="text1" select="'Чертеж объекта'"/>
                                     </xsl:call-template>
-                                    <table class="tbl_section_sheet">
+                                    <table class="tbl_section_content">
                                         <tbody>
                                             <tr>
                                                 <td class="left">
@@ -1722,7 +1793,7 @@
                                 <xsl:call-template name="header1">
                                     <xsl:with-param name="text1" select="'Чертеж объекта'"/>
                                 </xsl:call-template>
-                                <table class="tbl_section_sheet">
+                                <table class="tbl_section_content">
                                     <tbody>
                                         <tr>
                                             <td style="text-align: left;">
@@ -1735,30 +1806,22 @@
                                 </table>
                             </xsl:otherwise>
                         </xsl:choose>        
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </xsl:template>
     <xsl:template match="Appendix">
         <xsl:call-template name="newPage"/>
-        <table class="tbl_container notprint">
-            <tbody>
-                <tr>
-                    <td>
-                        <xsl:call-template name="header1">
+        <xsl:call-template name="header1">
                             <xsl:with-param name="text1" select="'Приложения'"/>
                         </xsl:call-template>
-                        <table class="tbl_section_sheet_data tbl_border_bottom">
-                            <caption>
-                                <table class="tbl_section_sheet_data">
+                        <table class="tbl_section_title">
+                            <tbody>
                                     <tr>
                                         <th class="col25mm">Номер приложения</th>
                                         <th class="col80mm">Наименование приложения</th>
                                         <th>Приложенный файл</th>
                                     </tr>
-                                </table>
-                            </caption>
+                            </tbody>
+                        </table>
+        <table class="tbl_section_content">
                             <thead>
                                 <tr>
                                     <th class="col25mm">1</th>
@@ -1790,18 +1853,12 @@
                                 </xsl:for-each>
                             </tbody>
                         </table>                        
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </xsl:template>
     <xsl:template name="GenerateMap">
         <xsl:param name="entitySpatial"/>
         <xsl:call-template name="newPage"/>
-        <div class="notprint">
-            <xsl:call-template name="header1">
-                <xsl:with-param name="text1" select="'Сгенерированная карта'"/>
-            </xsl:call-template>
+        <div class="notPrint">
+            <b>Сгенерированная карта</b>
             <svg/>
             <xsl:variable name="yMin">
                 <xsl:for-each select="//EntitySpatial/*//Ordinate/@Y">
@@ -1911,7 +1968,7 @@
                     </xsl:if>
                 </xsl:for-each>
                 <xsl:text>]};</xsl:text>                            
-                                
+                
                 <xsl:text></xsl:text>                
                 var width = document.documentElement.clientWidth - 100;
                 var height = 800;                
@@ -1920,7 +1977,7 @@
                 <xsl:value-of select="concat('var xMin = ', $xMin,';')"/>
                 <xsl:value-of select="concat('var xMax = ', $xMax,';')"/>
                 var yAvg = (((yMax - yMin) / 2)+yMin),
-                    xAvg = (((xMax - xMin) / 2)+xMin);
+                xAvg = (((xMax - xMin) / 2)+xMin);
                 var scale = (width/(yAvg-yMin))/2 > (height/(xAvg-xMin))/2 ? (height/(xAvg-xMin))/2 : (width/(yAvg-yMin))/2;
                 var scaleMx = Math.floor(width/(yMax-yMin));
                 scaleMx = scaleMx > 1 ? scaleMx : 1;
@@ -1934,59 +1991,59 @@
                 var path = d3.geoPath()
                 .projection(matrix(scaleMx, 0, 0, -scaleMx, (width/2)-(yAvg*scaleMx), (height/2)+(xAvg*scaleMx)));
                 function matrix(a, b, c, d, tx, ty) {
-                  return d3.geoTransform({
-                    point: function(x, y) {
-                      this.stream.point(a * x + b * y + tx, c * x + d * y + ty);
-                    }
-                  });
+                return d3.geoTransform({
+                point: function(x, y) {
+                this.stream.point(a * x + b * y + tx, c * x + d * y + ty);
+                }
+                });
                 }  
                 
                 var zoom = d3.zoom()
-                             .scaleExtent([1 / 10, 20])
-                             .on("zoom", function () {
-                                           g.attr("transform", 
-                                                  "translate(" + d3.event.transform.x + 
-                                                  "," + d3.event.transform.y + 
-                                                  ")scale(" + d3.event.transform.k + ")"
-                                                  );
-                                         }
-                                );
+                .scaleExtent([1 / 10, 20])
+                .on("zoom", function () {
+                g.attr("transform", 
+                "translate(" + d3.event.transform.x + 
+                "," + d3.event.transform.y + 
+                ")scale(" + d3.event.transform.k + ")"
+                );
+                }
+                );
                 
                 var g = svg.append("g");
-
+                
                 svg.append("rect")
                 .attr("width", width)
                 .attr("height", height)
                 .call(zoom)
                 .call(zoom.scaleTo, scale/scaleMx);
                 
-<!--   Площадные объекты       -->
+                <!--   Площадные объекты       -->
                 var polygon = json.features.filter(function(d) { return d.properties.ObjectType === "polygons";});
                 var gPolygon = g.append("g").attr("class", "polygons");                
                 gPolygon.selectAll(".polygons")
-                    .data(polygon)
-                    .enter().append("path")
-                    .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
-                    .attr("numObj", function(d) {return d.properties.NumbCont;})
-                    .attr("d", path);
-<!--   Точечные объекты       -->                
+                .data(polygon)
+                .enter().append("path")
+                .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
+                .attr("numObj", function(d) {return d.properties.NumbCont;})
+                .attr("d", path);
+                <!--   Точечные объекты       -->                
                 var point = json.features.filter(function(d) { return d.properties.ObjectType === "points";});
                 var gPoint = g.append("g").attr("class", "points");                
                 gPoint.selectAll(".points")
-                    .data(point)
-                    .enter().append("path")
-                    .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
-                    .attr("numObj", function(d) {return d.properties.NumbCont;})
-                    .attr("d", path);           
-<!--   Линейные объекты       -->
+                .data(point)
+                .enter().append("path")
+                .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
+                .attr("numObj", function(d) {return d.properties.NumbCont;})
+                .attr("d", path);           
+                <!--   Линейные объекты       -->
                 var polyline = json.features.filter(function(d) {return d.properties.ObjectType === "polylines"});
                 var gPline = g.append("g").attr("class", "polylines");                
                 gPline.selectAll(".polylines")
-                    .data(polyline)
-                    .enter().append("path")
-                    .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
-                    .attr("numObj", function(d) {return d.properties.NumbCont;})
-                    .attr("d", path);
+                .data(polyline)
+                .enter().append("path")
+                .attr("class", function(d) {return d.properties.ObjectType + d.properties.Underground;})
+                .attr("numObj", function(d) {return d.properties.NumbCont;})
+                .attr("d", path);
                 
                 <!--g.selectAll("path")
                 .data(json.features)
@@ -1999,6 +2056,7 @@
         </div>
     </xsl:template>
     
+    
     <!-- *******************InputData************************* -->    
     <xsl:template match="Documents">
         <xsl:for-each select="Document">
@@ -2006,13 +2064,13 @@
                 <td>
                     <xsl:value-of select="position()"/>
                 </td>
-                <td class="left">
+                <td>
                     <xsl:value-of select="Name"/>
                     <xsl:variable name="documents" select="document(concat($urlPrefixDict, 'dAllDocuments_v02.xsd'))"/>
                     <xsl:variable name="code" select="CodeDocument"/>
                     <xsl:value-of select="concat(' (', $documents//xs:enumeration[@value = $code]/xs:annotation/xs:documentation, ')')"/>
                 </td>
-                <td class="left">
+                <td >
                     <xsl:value-of select="concat('№ ', Number, ' от ', Date)"/>
                 </td>
             </tr>
@@ -2587,7 +2645,7 @@
     <xsl:template name="header1">
         <xsl:param name="text1"/>
         <xsl:param name="text2"/>
-        <table class="tbl_section_sheet">
+        <table class="tbl_section_title" style="text-align: center;">
             <tbody>
                 <tr>
                     <td>
