@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:Doc1="urn://x-artefacts-rosreestr-ru/commons/complex-types/document/1.0.1" xmlns:Simple1="urn://x-artefacts-rosreestr-ru/commons/simple-types/1.0" xmlns:dAl1="urn://x-artefacts-rosreestr-ru/commons/directories/all-documents/1.0.1" xmlns:dAp1="urn://x-artefacts-rosreestr-ru/commons/directories/applied-file/1.0.1" targetNamespace="urn://x-artefacts-rosreestr-ru/commons/complex-types/document/1.0.1" elementFormDefault="qualified">
+	<!--Общие составные типы данных-->
+	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/simple-types/1.0" schemaLocation="P_CommonSimpleType_v01.xsd"/>
+	<!--Справочник Все документы-->
+	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/directories/all-documents/1.0.1" schemaLocation="dAllDocuments_v01.xsd"/>
+	<!--Справочник Виды приложенных файлов-->
+	<xs:import namespace="urn://x-artefacts-rosreestr-ru/commons/directories/applied-file/1.0.1" schemaLocation="dAppliedFiles_v01.xsd"/>
+	<!--Повторно используемая подсхема "Документ"-->
+	<xs:complexType name="tDocument">
+		<xs:annotation>
+			<xs:documentation>Документ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CodeDocument" type="dAl1:dAllDocuments">
+				<xs:annotation>
+					<xs:documentation>Код документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="Simple1:s500" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Series" type="Simple1:s45" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Серия документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Number" type="Simple1:s45">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IssueOrgan" type="Simple1:s500" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Организация, выдавшая документ. Автор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Desc" type="Simple1:s1000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Особые отметки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppliedFile" type="Doc1:tAppliedFile" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Приложенный файл</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Повторно используемая подсхема "Приложенный файл"-->
+	<xs:complexType name="tAppliedFile">
+		<xs:annotation>
+			<xs:documentation>Приложенный файл</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Kind" type="dAp1:dApplied_file" use="required">
+			<xs:annotation>
+				<xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="Simple1:s500" use="required">
+			<xs:annotation>
+				<xs:documentation>Относительный путь к файлу с изображением\Имя файла с изображением</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

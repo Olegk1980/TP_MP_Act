@@ -1,0 +1,334 @@
+body{
+	background-color: #fff;
+	color: #000;	
+	font-family: times new roman, arial, sans-serif;
+	text-align: center; 
+	margin-top: 30px;
+}
+
+#container{
+	width: 800px;
+	margin: 0 auto;
+	overflow: hidden;
+	border: 1px solid #000;
+	letter-spacing: 1px;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+	word-break: break-word;
+}
+
+#container-header, #general-header, #inputdata-header, #survey-header, div.formparcel-header, div.otherdata-header{
+	padding: 5px;
+	margin: 2px;
+	border: 1px solid #000;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+#general-content, #inputdata-content, #survey-content, div.formparcel-content, div.otherdata-content{
+	margin: 0 auto;
+	font-size: 12pt;
+	font-weight: normal;
+}
+
+#general-content>div.subcontent, #inputdata-content>div.subcontent, #survey-content>div.subcontent, div.formparcel-content>div.subcontent, div.otherdata-content>div.subcontent{
+	margin: 2px;
+	border: 1px solid #000;
+	font-weight: bold;
+}
+
+#general-content div.subcontent-header, #inputdata-content div.subcontent-header, #survey-content div.subcontent-header, div.formparcel-content div.subcontent-header{
+	padding: 2px;
+}
+
+#general-content div.contentdata, #clients, #contractor-fio, #contractor-cert, #contractor-phone, #contractor-address, #contractor-name, #contractor-date{
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	border-top: 1px solid #000;
+	font-weight: normal;
+	text-align: left;
+	letter-spacing: 0;
+}
+
+#clients.bigmargin{
+	border-top: 0;
+	margin-left: 20px;
+	margin-right: 20px;
+	text-align: center;
+}
+
+#clients.nowrap, #inputdata-content div.nowrap, #survey-content div.nowrap, div.formparcel-content div.nowrap{
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	white-space: normal;
+	word-wrap: normal;
+	word-break: normal;
+}
+
+#clients.comment{
+	border: 0;
+}
+
+#clients>div.center{
+	border-bottom: 1px solid #000;
+	font-weight: normal;
+}
+
+#general-content div.nowrapblock, #coordsystem>div.nowrapblock{
+	white-space: nowrap;
+}
+
+#general-content div.cell, #inputdata-content div.cell, div.parcel-def div.cell{
+	display: table-cell;
+}
+
+#general-content div.cell.ul, #contractor-address>div.ul, #contractor-name>div.ul, #contractor-date .left.ul, #coordsystem>div.cell.ul, div.parcel-def div.cell.ul, div.subcontent-header span.value.ul, div.otherdata-content span.value.ul{
+	border-bottom: 1px solid #000;
+}
+
+#general-content div.cell.wide, div.parcel-def div.cell.wide{
+	width: 100%;
+}
+
+#general-content span.value, #contractor-date .leftpad{
+	margin-left: 5px;
+}
+
+#contractor-date .left{
+	float: left;
+}
+
+#contractor-date span.value2, div.parcel-def span.value2{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#coordsystem{
+	margin-top: 3px;
+	text-align: -webkit-center;
+	text-align: -moz-center;
+	display: inline-table;
+}
+
+#coordsystem>div.cell.value, div.subcontent-header span.value, div.otherdata-content span.value{
+	padding-left: 5px;
+	padding-right: 5px;
+	letter-spacing: 0;
+}
+
+.italic{
+	font-size: 10pt;
+	font-style: italic;
+}
+
+.bold{
+	font-weight: bold;
+}
+
+.left{
+	text-align: left;
+}
+
+#table2-1, #table2-2, #table2-3, #table2-4, #table2-5, 
+#table3-1, #table3-2, #table3-3, #table3-4, #table3-5,
+div.table-parcel{
+	display: table;
+	border: 0;
+	width: 792px;
+	height: 100%;
+	letter-spacing: 0;
+	font-size: 12pt;
+	font-weight: normal;
+	table-layout: fixed;
+}
+
+#table2-2-xy, #table2-2-xy-n, div.table-xy{
+	display: table;
+	border: 0;
+	width: 100%;
+	height: 100%;
+	letter-spacing: 0;
+	font-size: 12pt;
+	font-weight: normal;
+	table-layout: fixed;
+}
+
+#table2-1>div.row, #table2-2>div.row, #table2-2-xy>div.row, #table2-2-xy-n>div.row, #table2-3>div.row, #table2-4>div.row, #table2-5>div.row, 
+#table3-1>div.row, #table3-2>div.row, #table3-3>div.row, #table3-4>div.row, #table3-5>div.row,
+div.table-parcel>div.row, div.table-xy>div.row{
+	display: table-row;
+}
+
+#table2-1 div.cell, #table2-2 div.cell, #table2-3 div.cell, #table2-4 div.cell, #table2-5 div.cell, 
+#table3-1 div.cell, #table3-2 div.cell, #table3-3 div.cell, #table3-4 div.cell, #table3-5 div.cell,
+div.table-parcel div.cell, div.table-xy div.cell{
+	display: table-cell;
+	padding-top: 2px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 2px;
+	border-top: 1px solid #000;
+	border-left: 1px solid #000;
+	word-wrap: break-word;
+	#vertical-align: middle;
+}
+
+#table2-1 div.cell.npp, #table2-2 div.cell.npp, #table2-3 div.cell.npp, #table2-4>div.row>div.cell.npp, #table2-5>div.row>div.cell.npp, 
+#table3-1>div.row>div.cell.npp, #table3-2>div.row>div.cell.npp, #table3-3>div.row>div.cell.npp, #table3-4>div.row>div.cell.npp, #table3-5>div.row>div.cell.npp{
+	border-left: 0;
+	#vertical-align: middle;
+	width: 40px;
+}
+
+#table2-2 div.cell.full, div.table-parcel div.cell.full{
+	padding: 0;
+	vertical-align: top;
+	height: 100%;
+}
+
+#table2-2 div.part, div.table-parcel div.part{
+	padding-top: 2px;
+	height: 40px;
+}
+
+div.table-parcel div.part2{
+	padding-top: 2px;
+	height: 88px;
+}
+
+#table2-2-xy div.cell.nlb, #table2-2-xy-n div.cell.nlb, div.table-xy div.cell.nlb{
+	border-left: 0;
+}
+
+#table2-2-xy-n div.cell.ntb, div.table-xy div.cell.ntb{
+	border-top: 0;
+}
+
+#t2-1-name, #table2-2-xy div.cell.half, #table2-2-xy-n div.cell.half, div.table-xy div.cell.half{
+	width: 50%;
+}
+
+#t2-2-name{
+	width: 45%;
+}
+
+#t2-2-class, #t3-4-area{
+	width: 16%;
+}
+
+#t3-4-area, #t3-5-cn, #t3-5-cn2, #t3-5-area{
+	width: 20%;
+}
+
+#t2-3-name, #t2-4-cn, #t2-5-cn, #t3-3-cn, #t3-3-cn2, #t3-4-cn{
+	width: 25%;
+}
+
+#t3-1-cn, #t3-2-cn{
+	width: 35%;
+}
+
+div.parcel-def{
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	border-top: 1px solid #000;
+	text-align: left;
+	letter-spacing: 0;
+	white-space: nowrap;
+}
+
+div.table-parcel>div.row>div.cell.first{
+	border-left: 0;
+	#vertical-align: middle;
+}
+
+div.table-parcel>div.row>div.cell.w60{
+	width: 60px;
+}
+
+div.table-parcel>div.row>div.cell.w100{
+	width: 100px;
+}
+
+div.table-parcel>div.row>div.cell.w115{
+	width: 115px;
+}
+
+div.table-parcel>div.row>div.cell.w135{
+	width: 135px;
+}
+
+div.table-parcel>div.row>div.cell.w150{
+	width: 150px;
+}
+
+div.table-parcel>div.row>div.cell.w180{
+	width: 180px;
+}
+
+div.table-parcel>div.row>div.cell.w200{
+	width: 200px;
+}
+
+div.table-parcel>div.row>div.cell.w250{
+	width: 250px;
+}
+
+div.table-parcel>div.row>div.cell.w300{
+	width: 300px;
+}
+
+div.table-parcel>div.row>div.cell.w370{
+	width: 370px;
+}
+
+div.table-parcel>div.row>div.cell.w390{
+	width: 390px;
+}
+
+div.formparcel-content>div.ntb, div.otherdata-content>div.ntb{
+	border-top: 0;
+}
+
+div.otherdata-content>div.text{
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	font-weight: normal;
+	text-align: justify;
+	letter-spacing: 0;
+}
+
+div.otherdata-content embed.pdf{
+	width: 100%;
+	height: 1092px;
+}
+
+div.otherdata-content embed.pdfcell{
+	width: 380px;
+	height: 530px;
+}
+
+div.procherk{
+	border: 0px solid #000;
+	display: inline;
+	font-size: 50%;
+	vertical-align: text-top;
+	padding-bottom: 5px;
+	letter-spacing: 0px;
+}
+
+*, *:before, *:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
