@@ -1725,7 +1725,11 @@
                 <tr>
                     <td class="left">
                         <div class="conclusion">
-                            <xsl:value-of select="."/>
+                            <xsl:call-template name="StringReplace">
+                                <xsl:with-param name="input" select="." />
+                                <xsl:with-param name="oldValue" select="'. '" />
+                                <xsl:with-param name="newValue" select="'.&lt;br&gt;'" />
+                            </xsl:call-template>
                         </div>
                     </td>
                 </tr>
@@ -2724,6 +2728,26 @@
                 <xsl:value-of select="."/>
             </xsl:if>
         </xsl:for-each>
+    </xsl:template>
+    <xsl:template name="StringReplace">
+        <xsl:param name="input" />
+        <xsl:param name="oldValue" />
+        <xsl:param name="newValue" />
+        <xsl:choose>
+            <xsl:when test="contains($input, $oldValue)">
+                <xsl:value-of select="substring-before($input,$oldValue)" />
+                <xsl:value-of select="$newValue" disable-output-escaping="yes"/>
+                <xsl:call-template name="StringReplace">
+                    <xsl:with-param name="input"
+                        select="substring-after($input,$oldValue)" />
+                    <xsl:with-param name="oldValue" select="$oldValue" />
+                    <xsl:with-param name="newValue" select="$newValue" />
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$input" />
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template name="svgPolygon">
         <xsl:param name="color"/>
