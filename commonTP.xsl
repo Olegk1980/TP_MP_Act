@@ -2099,13 +2099,13 @@
                     <xsl:value-of select="OrdY"/>
                 </td>
                 <td>
-                    <xsl:value-of select="'сохраненно'"/>
+                    <xsl:value-of select="'сохранено'"/>
                 </td>
                 <td>
-                    <xsl:value-of select="'сохраненно'"/>
+                    <xsl:value-of select="'сохранено'"/>
                 </td>
                 <td>
-                    <xsl:value-of select="'сохраненно'"/>
+                    <xsl:value-of select="'сохранено'"/>
                 </td>
             </tr>
         </xsl:for-each>
