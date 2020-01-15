@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="1.0">
     <xsl:output method="html" indent="yes" omit-xml-declaration="yes" encoding="UTF-8"/>
 
@@ -40,8 +40,8 @@
             <head>
                 <title>Технический план</title>
                 <meta name="Content-Style-Type" content="text/css"/>
-                 <script type="text/javascript" src="http://d3js.org/d3.v4.min.js"/>
-                 <style type="text/css">
+                <script type="text/javascript" src="http://d3js.org/d3.v4.min.js"/>
+                <style type="text/css">
                     body{
                     background-color: #fff;
                     color: #000;
@@ -523,12 +523,20 @@
                 </tr>
                 <tr>
                     <td width="50%" >
-                        <xsl:text>N регистрации в государственном реестре лиц, осуществляющих кадастровую деятельность</xsl:text>
+                        <xsl:text>Уникальный регистрационный номер члена саморегулируемой организации кадастровых инженеров в реестре членов саморегулируемой организаци кадастровых инженеров и дата внесения сведений о физическом лице в такой реестр</xsl:text>
                     </td>
                     <td width="50%" >
                         <xsl:call-template name="inputText"/>
                     </td>
                 </tr>
+<!--                <tr>
+                    <td width="50%" >
+                        <xsl:text>N регистрации в государственном реестре лиц, осуществляющих кадастровую деятельность</xsl:text>
+                    </td>
+                    <td width="50%" >
+                        <xsl:call-template name="inputText"/>
+                    </td>
+                </tr>-->
                 <tr>
                     <td width="50%" >
                         <xsl:text>Контактный телефон</xsl:text>
@@ -560,13 +568,15 @@
                 </tr>
                 <tr>
                     <td width="50%" >
-                        <xsl:text>Сокращенное наименование юридического лица, если кадастровый инженер является работником юридического лица</xsl:text>
+                        <xsl:text>Полное или (в случае, если имеется) сокращенное наименование юридического лица, если кадастровый инженер является работником юридического лица, адрес юридического лица</xsl:text>
                     </td>
                     <td width="50%" >
                         <xsl:choose>
                             <xsl:when test="Contractor/Organization">
                                 <ins>
                                     <xsl:value-of select="Contractor/Organization/Name"/>
+                                    <br />
+                                    <xsl:value-of select="Contractor/Organization/AddressOrganization"/>
                                 </ins>
                             </xsl:when>
                             <xsl:otherwise>
@@ -577,7 +587,7 @@
                 </tr>
                 <tr>
                     <td width="50%" >
-                        <xsl:text>N и дата заключения договора на выполнение кадастровых работ</xsl:text>
+                        <xsl:text>Наименование, номер и дата документа, на основании которого выполняются кадастровые работы</xsl:text>
                     </td>
                     <td width="50%" >
                         <xsl:call-template name="inputText">
@@ -590,9 +600,11 @@
                         <xsl:text>Дата подготовки технического плана (число, месяц, год)</xsl:text>                    
                     </td>
                     <td width="50%" >
-                        <xsl:value-of select="substring(@DateCadastral, 9, 2)"/>.
-                        <xsl:value-of select="substring(@DateCadastral, 6, 2)"/>.
-                        <xsl:value-of select="substring(@DateCadastral, 1, 4)"/> 
+                        <ins>
+                            <xsl:value-of select="substring(@DateCadastral, 9, 2)"/>.
+                            <xsl:value-of select="substring(@DateCadastral, 6, 2)"/>.
+                            <xsl:value-of select="substring(@DateCadastral, 1, 4)"/>
+                        </ins>
                     </td>
                 </tr>                
             </tbody>
@@ -1429,8 +1441,13 @@
                 </tr>
                 <tr>
                     <td>9</td>
-                    <td class="left">Наименование объекта недвижимости</td>
-                    <td class="left"><xsl:value-of select="$node/Name"/></td>
+                    <td class="left">Наименование объекта недвижимости</td>					
+					<xsl:choose>
+                        <xsl:when test="$node/Name != ''">
+                            <td class="left"><xsl:value-of select="$node/Name"/></td>
+                        </xsl:when>
+                        <xsl:otherwise><td class="left"><xsl:call-template name="inputText"/></td></xsl:otherwise>
+                    </xsl:choose>
                 </tr>
                 <tr>
                     <td rowspan="2">10</td>
@@ -2099,13 +2116,13 @@
                     <xsl:value-of select="OrdY"/>
                 </td>
                 <td>
-                    <xsl:value-of select="'сохраненно'"/>
+                    <xsl:value-of select="'сохранено'"/>
                 </td>
                 <td>
-                    <xsl:value-of select="'сохраненно'"/>
+                    <xsl:value-of select="'сохранено'"/>
                 </td>
                 <td>
-                    <xsl:value-of select="'сохраненно'"/>
+                    <xsl:value-of select="'сохранено'"/>
                 </td>
             </tr>
         </xsl:for-each>
@@ -2284,7 +2301,15 @@
                             </xsl:choose>
                         </td>
                         <td>
-                            <xsl:value-of select="./Formula"/>
+                            <!-- <xsl:value-of select="./Formula"/> -->
+                            <xsl:choose>
+                                <xsl:when test="contains(./Formula,'Формула0.10')">
+                                    <xsl:value-of select="'Mt = √m²0 + m²0, Mt = √0.10² + 0.03² = 0.10 м'"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="./Formula"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </td>
                     </tr>
                 </xsl:when>
@@ -2297,7 +2322,15 @@
                             <xsl:value-of select="concat($firstNumGeopoint,' - ',$lastNumGeopoint)"/>
                         </td>
                         <td>
-                            <xsl:value-of select="./Formula"/>
+                            <!-- <xsl:value-of select="./Formula"/> -->
+                            <xsl:choose>
+                                <xsl:when test="contains(./Formula,'Формула0.10')">
+                                    <xsl:value-of select="'Mt = √m²0 + m²0, Mt = √0.10² + 0.03² = 0.10 м'"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="./Formula"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </td>
                     </tr>
                 </xsl:otherwise>
