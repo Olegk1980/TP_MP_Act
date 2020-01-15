@@ -601,8 +601,8 @@
                     </td>
                     <td width="50%" >
                         <ins>
-                            <xsl:value-of select="substring(@DateCadastral, 9, 2)"/>.
-                            <xsl:value-of select="substring(@DateCadastral, 6, 2)"/>.
+                            <xsl:value-of select="concat(substring(@DateCadastral, 9, 2), '.')"/>
+                            <xsl:value-of select="concat(substring(@DateCadastral, 6, 2), '.')"/>
                             <xsl:value-of select="substring(@DateCadastral, 1, 4)"/>
                         </ins>
                     </td>
